@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using GolPro.utils;
+using GolPro.Model;
 using System;
 
 namespace GolPro
@@ -33,6 +34,8 @@ namespace GolPro
                 tela.PrepararTela("GolPRO - Sistema de registro", 2, 2, 79, 24);
                 menuEscolhido = tela.MostrarMenu(listMenu);
 
+               
+
                 if (menuEscolhido == "0")
                 {
                     Console.ResetColor();
@@ -43,11 +46,7 @@ namespace GolPro
 
                 if (menuEscolhido == "1")
                 {
-                    Console.Clear();
-                    Console.WriteLine("Cadastro de Jogador");
-
-                    Console.WriteLine("\nPressione qualquer tecla para voltar ao menu...");
-                    Console.ReadKey(); // Aguarda o usuário interagir antes de reiniciar o loop
+                    TimeModel time = new TimeModel(); // ← isso não faz nada
                 }
                 else if (menuEscolhido == "2")
                 {

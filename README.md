@@ -65,5 +65,46 @@ Pós-condição: Relatório de artilheiros exibido ou mensagem informativa
 Localização: PartidaController.ReportArtilheiros()
 
 
-# Diagrama de Classes
-s
+# Classe 
+
+## TimeModel 
+Atributos
+- _codigo: string
+- _nome: string
+- _cidade: string
+- _pontos: int
+- _vitorias: int
+- _empates: int
+- _derrotas: int
+- _golsPro: int
+- _golsContra: int
+
+Metodos
++ RegistrarResultado(): void
++ EstornarResultado(): void
++ Serializar(): string
+
+
+## JogadorModel
+Atributos
+- _matricula: string
+- _nome: string
+- _posicao: string
+- _codigoTime: string
+- _gols: int
+Metodos
+
++ registrarResultado(): 
++ Serializar(): string
+
+## PartidaModel
+- _id: int 
+- _codigoMandante: str
+- _codigoVisitante: str
+- _data: DateTime
+- _golsMandante: int 
+
+Metodos
++ Placar(): string
++ Serializar: string
+
