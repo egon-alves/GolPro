@@ -1,0 +1,11 @@
+# Visual Studio
+.vs/
+
+# Arquivos compilados
+bin/
+obj/
+
+# Arquivos específicos
+*.user
+*.suo
+*.cache
