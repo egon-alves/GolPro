@@ -1,0 +1,3 @@
+01;Egon;Lateral;PAL;0;0
+1;Egon;Lateral;FLA;0;0
+02;Egonnnnn;AL;PASD;0;0
