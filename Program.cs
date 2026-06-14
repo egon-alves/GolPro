@@ -43,7 +43,7 @@ namespace GolPro
                 }
                 else if (menuEscolhido == "1")
                 {
-                    timeController.GerenciarCadastro();
+                    timeController.CRUD();
                 }
                 else if (menuEscolhido == "2")
                 {

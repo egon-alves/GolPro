@@ -11,6 +11,7 @@ namespace GolPro.Controller
         private List<string> _fields;
         private List<TimeModel> _times;
         private Tela _tela;
+        private TimeModel _current; // registro encontrado/em edição
 
         public List<TimeModel> Times
         {
@@ -25,13 +26,20 @@ namespace GolPro.Controller
             this._width  = width;
             this._height = height;
             this._tela   = tela;
-            this._times  = new List<TimeModel>();
             this._fields = new List<string> { "Código", "Nome", "Cidade" };
+
+            // Registro pré-carregado
+            this._times = new List<TimeModel>
+            {
+                new TimeModel("FLA", "Flamengo",    "Rio de Janeiro"),
+                new TimeModel("PAL", "Palmeiras",   "São Paulo"),
+                new TimeModel("GRE", "Grêmio",      "Porto Alegre")
+            };
         }
 
-        // ── Busca ────────────────────────────────────────────────────────────
+        // ── Busca (privado) ───────────────────────────────────────────────────
 
-        private TimeModel BuscarPorCodigo(string codigo)
+        private TimeModel FindByCode(string codigo)
         {
             foreach (TimeModel time in _times)
             {
@@ -43,31 +51,63 @@ namespace GolPro.Controller
 
         // ── Tela ─────────────────────────────────────────────────────────────
 
-        private void DesenharTela()
+        public void ShowForm()
         {
             _tela.PrepararTela("Cadastro de Times", _column, _row, _column + _width, _row + _height);
-        }
-
-        private void MostrarCampos(string codigo, string nome, string cidade)
-        {
-            // Limpa a área dos campos antes de escrever
-            for (int i = 0; i < 6; i++)
-            {
-                Console.SetCursorPosition(_column + 2, _row + 3 + i);
-                Console.Write(new string(' ', _width - 3));
-            }
 
             Console.SetCursorPosition(_column + 2, _row + 3);
-            Console.Write($"Código  : {codigo}");
+            Console.Write("Código  : ");
 
             Console.SetCursorPosition(_column + 2, _row + 5);
-            Console.Write($"Nome    : {nome}");
+            Console.Write("Nome    : ");
 
             Console.SetCursorPosition(_column + 2, _row + 7);
-            Console.Write($"Cidade  : {cidade}");
+            Console.Write("Cidade  : ");
         }
 
-        private void MostrarMensagem(string msg)
+        public void EnterData(string which)
+        {
+            if (which == "PK")
+            {
+                // Lê apenas a chave primária (Código)
+                Console.SetCursorPosition(_column + 12, _row + 3);
+                string codigo = (Console.ReadLine() ?? "").ToUpper().Trim();
+                _current = new TimeModel();
+                _current.Codigo = codigo;
+            }
+            else if (which == "DT")
+            {
+                // Lê os demais dados (Nome e Cidade)
+                Console.SetCursorPosition(_column + 12, _row + 5);
+                _current.Nome = Console.ReadLine() ?? "";
+
+                Console.SetCursorPosition(_column + 12, _row + 7);
+                _current.Cidade = Console.ReadLine() ?? "";
+            }
+        }
+
+        public void ShowData()
+        {
+            if (_current == null) return;
+
+            // Limpa área dos campos
+            for (int i = 0; i < 6; i++)
+            {
+                Console.SetCursorPosition(_column + 12, _row + 3 + i);
+                Console.Write(new string(' ', _width - 14));
+            }
+
+            Console.SetCursorPosition(_column + 12, _row + 3);
+            Console.Write(_current.Codigo);
+
+            Console.SetCursorPosition(_column + 12, _row + 5);
+            Console.Write(_current.Nome);
+
+            Console.SetCursorPosition(_column + 12, _row + 7);
+            Console.Write(_current.Cidade);
+        }
+
+        private void ShowMessage(string msg)
         {
             Console.SetCursorPosition(_column + 2, _row + _height - 2);
             Console.Write(new string(' ', _width - 3));
@@ -76,90 +116,71 @@ namespace GolPro.Controller
             Console.ReadLine();
         }
 
-        // ── Fluxo principal ───────────────────────────────────────────────────
+        // ── CRUD ──────────────────────────────────────────────────────────────
 
-        public void GerenciarCadastro()
+        public void CRUD()
         {
-            DesenharTela();
-            MostrarCampos("", "", "");
+            ShowForm();
+            EnterData("PK");
 
-            // Pede apenas o Código primeiro
-            Console.SetCursorPosition(_column + 12, _row + 3);
-            string codigo = (Console.ReadLine() ?? "").ToUpper().Trim();
-
-            if (string.IsNullOrEmpty(codigo))
-                return;
-
-            TimeModel encontrado = BuscarPorCodigo(codigo);
+            TimeModel encontrado = FindByCode(_current.Codigo);
 
             if (encontrado != null)
             {
-                // Exibe os dados do time encontrado
-                MostrarCampos(encontrado.Codigo, encontrado.Nome, encontrado.Cidade);
+                // Registro existe: exibe dados e oferece Alterar ou Excluir
+                _current = encontrado;
+                ShowData();
 
-                // Oferece Editar ou Remover
                 string opcao = _tela.MostrarMenu(new List<string>
                 {
-                    "1 - Editar",
-                    "2 - Remover",
+                    "1 - Alterar",
+                    "2 - Excluir",
                     "0 - Voltar"
                 });
 
-                if (opcao == "1") Editar(encontrado);
-                else if (opcao == "2") Remover(encontrado);
+                if (opcao == "1")
+                {
+                    // Alterar: redesenha form com dados atuais e pede novos DT
+                    ShowForm();
+                    ShowData();
+                    EnterData("DT");
+                    encontrado.Nome   = _current.Nome;
+                    encontrado.Cidade = _current.Cidade;
+                    ShowMessage("Time alterado com sucesso!");
+                }
+                else if (opcao == "2")
+                {
+                    // Excluir com confirmação
+                    Console.SetCursorPosition(_column + 2, _row + _height - 2);
+                    Console.Write($"Confirma exclusão de '{encontrado.Nome}'? (S/N): ");
+                    string resp = (Console.ReadLine() ?? "").ToUpper();
+                    if (resp == "S")
+                    {
+                        _times.Remove(encontrado);
+                        ShowMessage("Time excluído com sucesso!");
+                    }
+                }
             }
             else
             {
-                // Código não existe — preenche o código já digitado e pede o resto
-                MostrarCampos(codigo, "", "");
+                // Registro não existe: oferece Incluir
+                string opcao = _tela.MostrarMenu(new List<string>
+                {
+                    "1 - Incluir",
+                    "0 - Voltar"
+                });
 
-                Console.SetCursorPosition(_column + 12, _row + 5);
-                string nome = Console.ReadLine() ?? "";
+                if (opcao == "1")
+                {
+                    ShowForm();
+                    // Reexibe o código já digitado
+                    Console.SetCursorPosition(_column + 12, _row + 3);
+                    Console.Write(_current.Codigo);
 
-                Console.SetCursorPosition(_column + 12, _row + 7);
-                string cidade = Console.ReadLine() ?? "";
-
-                Criar(codigo, nome, cidade);
-            }
-        }
-
-        // ── Operações ─────────────────────────────────────────────────────────
-
-        private void Criar(string codigo, string nome, string cidade)
-        {
-            _times.Add(new TimeModel(codigo, nome, cidade));
-            MostrarMensagem("Time cadastrado com sucesso!");
-        }
-
-        private void Editar(TimeModel time)
-        {
-            DesenharTela();
-            MostrarCampos(time.Codigo, time.Nome, time.Cidade);
-
-            // Código não pode ser editado
-            Console.SetCursorPosition(_column + 12, _row + 5);
-            string novoNome = Console.ReadLine() ?? "";
-            if (!string.IsNullOrWhiteSpace(novoNome))
-                time.Nome = novoNome;
-
-            Console.SetCursorPosition(_column + 12, _row + 7);
-            string novaCidade = Console.ReadLine() ?? "";
-            if (!string.IsNullOrWhiteSpace(novaCidade))
-                time.Cidade = novaCidade;
-
-            MostrarMensagem("Time atualizado com sucesso!");
-        }
-
-        private void Remover(TimeModel time)
-        {
-            Console.SetCursorPosition(_column + 2, _row + _height - 2);
-            Console.Write($"Confirma remoção de '{time.Nome}'? (S/N): ");
-            string resposta = (Console.ReadLine() ?? "").ToUpper();
-
-            if (resposta == "S")
-            {
-                _times.Remove(time);
-                MostrarMensagem("Time removido com sucesso!");
+                    EnterData("DT");
+                    _times.Add(new TimeModel(_current.Codigo, _current.Nome, _current.Cidade));
+                    ShowMessage("Time incluído com sucesso!");
+                }
             }
         }
     }
