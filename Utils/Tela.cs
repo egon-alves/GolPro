@@ -67,13 +67,13 @@ namespace GolPro.utils
         {
             Console.BackgroundColor = this._corTela;
             Console.ForegroundColor = this._corTexto;
-            
+
             // Salva os limites para cálculo do menu
             this._limiteColIni = colunaInicial;
             this._limiteLinIni = linhaInicial;
             this._limiteColFin = colunaFinal;
             this._limiteLinFin = linhaFinal;
-            
+
             Console.Clear();
 
             this.DesenhaMoldura(colunaInicial, linhaInicial, colunaFinal, linhaFinal);
@@ -88,7 +88,7 @@ namespace GolPro.utils
 
             // Calcula o centro baseado na moldura principal
             int colini = this._limiteColIni + ((this._limiteColFin - this._limiteColIni - larguraMenu) / 2);
-            int linini = this._limiteLinIni + ((this._limiteLinFin - this._limiteLinIni - alturaMenu) / 2) -4;
+            int linini = this._limiteLinIni + ((this._limiteLinFin - this._limiteLinIni - alturaMenu) / 2) - 4;
 
             int colfin = colini + larguraMenu;
             int linfin = linini + alturaMenu;
@@ -100,11 +100,22 @@ namespace GolPro.utils
                 Console.SetCursorPosition(colini + 1, linini + 1 + x);
                 Console.Write(opcoes[x]);
             }
-            
+
             Console.SetCursorPosition(colini + 1, linini + 1 + opcoes.Count);
             Console.Write("Opção : ");
             return Console.ReadLine();
         }
+
+        public void MostrarMensagem(string msg, int col, int row)
+        {
+            Console.SetCursorPosition(col, row);
+            Console.Write(new string(' ', 60)); // limpa a linha
+            Console.SetCursorPosition(col, row);
+            Console.Write(msg + " Pressione Enter...");
+            Console.ReadLine();
+        }
+
     }
-        
+
+
 }

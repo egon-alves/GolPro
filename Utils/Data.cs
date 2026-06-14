@@ -65,5 +65,20 @@ namespace GolPro.utils
 
             return times;
         }
+    
+
+    // Area de Jogadores
+    
+        public void SalvarJogador(List<JogadorModel> jogadores)
+        {
+            using(StreamWriter sw = new StreamWriter(this._arquivo))
+            {
+                foreach(JogadorModel jogador in jogadores)
+                {
+                    sw.WriteLine(jogador.Serializar());
+                }
+            }
+        }
+    
     }
 }

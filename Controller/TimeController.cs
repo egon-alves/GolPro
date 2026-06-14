@@ -104,14 +104,6 @@ namespace GolPro.Controller
             Console.Write(_current.Cidade);
         }
 
-        private void ShowMessage(string msg)
-        {
-            Console.SetCursorPosition(_column + 2, _row + _height - 2);
-            Console.Write(new string(' ', _width - 3));
-            Console.SetCursorPosition(_column + 2, _row + _height - 2);
-            Console.Write(msg + " Pressione Enter...");
-            Console.ReadLine();
-        }
 
         // ── CRUD ──────────────────────────────────────────────────────────────
 
@@ -144,7 +136,7 @@ namespace GolPro.Controller
                     encontrado.Nome   = _current.Nome;
                     encontrado.Cidade = _current.Cidade;
                     _data.SalvarTimes(_times);
-                    ShowMessage("Time alterado com sucesso!");
+                    _tela.MostrarMensagem("Time alterado com sucesso!", _column + 2, _row + _height - 2);
                 }
                 else if (opcao == "2")
                 {
@@ -156,7 +148,7 @@ namespace GolPro.Controller
                     {
                         _times.Remove(encontrado);
                         _data.SalvarTimes(_times);
-                        ShowMessage("Time excluído com sucesso!");
+                        _tela.MostrarMensagem("Time excluído com sucesso!", _column + 2, _row + _height - 2);
                     }
                 }
             }
@@ -179,7 +171,7 @@ namespace GolPro.Controller
                     EnterData("DT");
                     _times.Add(new TimeModel(_current.Codigo, _current.Nome, _current.Cidade));
                     _data.SalvarTimes(_times); 
-                    ShowMessage("Time incluído com sucesso!");
+                    _tela.MostrarMensagem("Time incluído com sucesso!", _column + 2, _row + _height - 2);
                 }
             }
         }

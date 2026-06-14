@@ -92,11 +92,11 @@ Atributos
 - _posicao: string
 - _codigoTime: string
 - _numeroCamisa: int
-- _gols: int
+- _golsMarcados: int
 Metodos
 
-+ RegistrarResultado(): void
-+ EstornarResultado(): void
++ AdicionarGols(): void
++ EstournarGols(): void
 + Serializar(): string
 
 ## PartidaModel

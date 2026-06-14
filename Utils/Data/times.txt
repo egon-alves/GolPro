@@ -1,1 +1,2 @@
-PAL;Palmeiras;Sao Paulo;0;0;0;0;0;0
+PAL;Paalmeiras;;0;0;0;0;0;0
+PAS;PASE;ASDASd;0;0;0;0;0;0
