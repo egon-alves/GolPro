@@ -88,7 +88,7 @@ namespace GolPro.utils
 
             // Calcula o centro baseado na moldura principal
             int colini = this._limiteColIni + ((this._limiteColFin - this._limiteColIni - larguraMenu) / 2);
-            int linini = this._limiteLinIni + ((this._limiteLinFin - this._limiteLinIni - alturaMenu) / 2) -6;
+            int linini = this._limiteLinIni + ((this._limiteLinFin - this._limiteLinIni - alturaMenu) / 2) -4;
 
             int colfin = colini + larguraMenu;
             int linfin = linini + alturaMenu;
@@ -97,11 +97,11 @@ namespace GolPro.utils
 
             for (int x = 0; x < opcoes.Count; x++)
             {
-                Console.SetCursorPosition(colini + 2, linini + 1 + x);
+                Console.SetCursorPosition(colini + 1, linini + 1 + x);
                 Console.Write(opcoes[x]);
             }
             
-            Console.SetCursorPosition(colini + 2, linini + 1 + opcoes.Count);
+            Console.SetCursorPosition(colini + 1, linini + 1 + opcoes.Count);
             Console.Write("Opção : ");
             return Console.ReadLine();
         }

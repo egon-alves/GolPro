@@ -74,7 +74,6 @@ namespace GolPro.Model
 
         // Metodo construtor - pode ser expandido para receber parâmetros ou realizar validações
 
-
         public TimeModel()
         {
             // Inicialização padrão - pode ser expandida conforme necessário
@@ -107,7 +106,7 @@ namespace GolPro.Model
 
         // Metodos adicionais para manipulação dos dados do time podem ser adicionados aqui
 
-        
+
              public void RegistrarPartida(int golsMarcados, int golsSofridos)
         {
             _golsPro += golsMarcados;
