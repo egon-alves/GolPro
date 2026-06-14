@@ -27,7 +27,7 @@ namespace GolPro.Controller
             this._height = height;
             this._tela   = tela;
             this._fields = new List<string> { "Código", "Nome", "Cidade" };
-            this._data = new Data("times.txt");
+           this._data = new Data("Utils/Data/times.txt");
 
             // Registro pré-carregado
 

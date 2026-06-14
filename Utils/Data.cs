@@ -11,6 +11,7 @@ namespace GolPro.utils
         public Data(string arquivo)
         {
             this._arquivo = arquivo;
+            Directory.CreateDirectory(Path.GetDirectoryName(arquivo));
         }
 
         public void SalvarTimes(List<TimeModel> times)
