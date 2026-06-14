@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using GolPro.Model;
 using GolPro.utils;
-
 namespace GolPro.Controller
 {
     public class TimeController
@@ -11,6 +10,7 @@ namespace GolPro.Controller
         private List<string> _fields;
         private List<TimeModel> _times;
         private Tela _tela;
+        private Data _data;
         private TimeModel _current; // registro encontrado/em edição
 
         public List<TimeModel> Times
@@ -27,14 +27,11 @@ namespace GolPro.Controller
             this._height = height;
             this._tela   = tela;
             this._fields = new List<string> { "Código", "Nome", "Cidade" };
+            this._data = new Data("times.txt");
 
             // Registro pré-carregado
-            this._times = new List<TimeModel>
-            {
-                new TimeModel("FLA", "Flamengo",    "Rio de Janeiro"),
-                new TimeModel("PAL", "Palmeiras",   "São Paulo"),
-                new TimeModel("GRE", "Grêmio",      "Porto Alegre")
-            };
+
+            this._times = this._data.CarregarTimes();
         }
 
         // ── Busca (privado) ───────────────────────────────────────────────────
@@ -146,6 +143,7 @@ namespace GolPro.Controller
                     EnterData("DT");
                     encontrado.Nome   = _current.Nome;
                     encontrado.Cidade = _current.Cidade;
+                    _data.SalvarTimes(_times);
                     ShowMessage("Time alterado com sucesso!");
                 }
                 else if (opcao == "2")
@@ -157,6 +155,7 @@ namespace GolPro.Controller
                     if (resp == "S")
                     {
                         _times.Remove(encontrado);
+                        _data.SalvarTimes(_times);
                         ShowMessage("Time excluído com sucesso!");
                     }
                 }
@@ -179,6 +178,7 @@ namespace GolPro.Controller
 
                     EnterData("DT");
                     _times.Add(new TimeModel(_current.Codigo, _current.Nome, _current.Cidade));
+                    _data.SalvarTimes(_times); 
                     ShowMessage("Time incluído com sucesso!");
                 }
             }
