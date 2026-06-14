@@ -14,13 +14,15 @@ namespace GolPro.Controller
         private Data _data;
         private JogadorModel _current;
 
+        private List<TimeModel> _times;
+
         public List<JogadorModel> Jogadores
         {
             get { return _jogadores; }
             set { _jogadores = value; }
         }
 
-        public JogadorController(int col, int row, int width, int height, Tela tela)
+        public JogadorController(int col, int row, int width, int height, Tela tela,List<TimeModel> times)
         {
             this._column = col;
             this._row = row;
@@ -46,6 +48,16 @@ namespace GolPro.Controller
             return null;
         }
 
+
+            private bool TimeExiste(string codigoTime)
+            {
+                foreach (TimeModel time in _times)
+                {
+                    if (time.Codigo.Equals(codigoTime, StringComparison.OrdinalIgnoreCase))
+                        return true;
+                }
+                return false;
+            }
         // ── Tela ─────────────────────────────────────────────────────────────
 
         public void ShowForm()
