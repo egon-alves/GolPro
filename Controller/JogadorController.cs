@@ -30,7 +30,14 @@ namespace GolPro.Controller
             this._tela = tela;
             this._fields = new List<string> { "Código", "Nome", "Posição", "Time" };
             this._data = new Data("Utils/Data/jogadores.txt");
+            
 
+            _jogadores.Add(new JogadorModel("J001", "Gabriel Barbosa",  "Atacante", "FLA"));
+            _jogadores.Add(new JogadorModel("J002", "Endrick",          "Atacante", "PAL"));
+            _jogadores.Add(new JogadorModel("J003", "Diego Souza",      "Meia",     "GRE"));
+
+
+            this._jogadores = this._data.CarregarJogador();
             // Registro pré-carregado
             // Não tem função
             //  this._jogadores = this._data.CarregarJogadores();
@@ -51,13 +58,16 @@ namespace GolPro.Controller
             _tela.PrepararTela("Cadastro de Jogadores", _column, _row, _column + _width, _row + _height);
 
             Console.SetCursorPosition(_column + 2, _row + 3);
-            Console.Write("Código  : ");
+            Console.Write("Matrícula  : ");
 
             Console.SetCursorPosition(_column + 2, _row + 5);
             Console.Write("Nome    : ");
 
             Console.SetCursorPosition(_column + 2, _row + 7);
-            Console.Write("Codigo do Time  : ");
+            Console.Write("Posição  : ");
+
+            Console.SetCursorPosition(_column + 2, _row + 7);
+            Console.Write("Código do Time  : ");
         }
 
         public void EnterData(string which)
