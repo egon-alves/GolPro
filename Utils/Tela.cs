@@ -7,246 +7,247 @@ namespace GolPro.utils
 {
     public class Tela
     {
-        // ── Paleta ────────────────────────────────────────────────────────────
-        private readonly ConsoleColor _corFundo       = ConsoleColor.Black;
-        private readonly ConsoleColor _corBorda       = ConsoleColor.DarkCyan;
-        private readonly ConsoleColor _corTitulo      = ConsoleColor.Cyan;
-        private readonly ConsoleColor _corTexto       = ConsoleColor.White;
-        private readonly ConsoleColor _corDestaque    = ConsoleColor.Yellow;
-        private readonly ConsoleColor _corSelBg       = ConsoleColor.DarkCyan;
-        private readonly ConsoleColor _corSelFg       = ConsoleColor.Black;
-        private readonly ConsoleColor _corMenuBorda   = ConsoleColor.DarkMagenta;
-        private readonly ConsoleColor _corMensagem    = ConsoleColor.Green;
-        private readonly ConsoleColor _corErro        = ConsoleColor.Red;
+        //
+        // atributos
+        //
+        private ConsoleColor _corFundo;
+        private ConsoleColor _corTexto;
 
-        private int _limiteColIni, _limiteLinIni, _limiteColFin, _limiteLinFin;
+        // paleta fixa do tema
+        private static readonly ConsoleColor Fundo      = ConsoleColor.Black;
+        private static readonly ConsoleColor Texto      = ConsoleColor.White;
+        private static readonly ConsoleColor Borda      = ConsoleColor.White;
+        private static readonly ConsoleColor Titulo     = ConsoleColor.White;
+        private static readonly ConsoleColor Destaque   = ConsoleColor.White;
+        private static readonly ConsoleColor MenuBorda  = ConsoleColor.White;
+        private static readonly ConsoleColor SelFundo   = ConsoleColor.White;
+        private static readonly ConsoleColor SelTexto   = ConsoleColor.Black;
+        private static readonly ConsoleColor CorSucesso = ConsoleColor.White;
+        private static readonly ConsoleColor CorErro    = ConsoleColor.White;
 
-        public Tela(ConsoleColor corTela, ConsoleColor corTexto) { }
+        // limites salvos para centralizar o menu
+        private int _ci, _li, _cf, _lf;
 
-        // ── Primitivos ────────────────────────────────────────────────────────
+        //
+        // construtores
+        //
 
-        public void LimparTela(int colIni, int linIni, int colFin, int linFin)
+        public Tela(ConsoleColor cf, ConsoleColor ct)
         {
-            Console.BackgroundColor = _corFundo;
-            for (int y = linIni; y <= linFin; y++)
-            {
-                Console.SetCursorPosition(colIni, y);
-                Console.Write(new string(' ', colFin - colIni + 1));
-            }
+            this._corFundo = cf;
+            this._corTexto = ct;
         }
 
-        private void DesenharCaixa(int colIni, int linIni, int colFin, int linFin, ConsoleColor corBorda)
+        public Tela() { }
+
+        //
+        // ── Métodos da interface Biblioteca (obrigatórios) ────────────────────
+        //
+
+        // PrepararTela: limpa, monta moldura, centraliza o título
+        public void PrepararTela(string titulo, int ci, int li, int cf, int lf)
         {
-            LimparTela(colIni, linIni, colFin, linFin);
-            Console.ForegroundColor = corBorda;
-
-            for (int col = colIni + 1; col < colFin; col++)
-            {
-                Console.SetCursorPosition(col, linIni); Console.Write("─");
-                Console.SetCursorPosition(col, linFin); Console.Write("─");
-            }
-            for (int lin = linIni + 1; lin < linFin; lin++)
-            {
-                Console.SetCursorPosition(colIni, lin); Console.Write("│");
-                Console.SetCursorPosition(colFin, lin); Console.Write("│");
-            }
-
-            Console.SetCursorPosition(colIni, linIni); Console.Write("┌");
-            Console.SetCursorPosition(colFin, linIni); Console.Write("┐");
-            Console.SetCursorPosition(colIni, linFin); Console.Write("└");
-            Console.SetCursorPosition(colFin, linFin); Console.Write("┘");
-
-            Console.ForegroundColor = _corTexto;
-        }
-
-        private void DesenharCaixaDupla(int colIni, int linIni, int colFin, int linFin, ConsoleColor corBorda)
-        {
-            LimparTela(colIni, linIni, colFin, linFin);
-            Console.ForegroundColor = corBorda;
-
-            for (int col = colIni + 1; col < colFin; col++)
-            {
-                Console.SetCursorPosition(col, linIni); Console.Write("═");
-                Console.SetCursorPosition(col, linFin); Console.Write("═");
-            }
-            for (int lin = linIni + 1; lin < linFin; lin++)
-            {
-                Console.SetCursorPosition(colIni, lin); Console.Write("║");
-                Console.SetCursorPosition(colFin, lin); Console.Write("║");
-            }
-
-            Console.SetCursorPosition(colIni, linIni); Console.Write("╔");
-            Console.SetCursorPosition(colFin, linIni); Console.Write("╗");
-            Console.SetCursorPosition(colIni, linFin); Console.Write("╚");
-            Console.SetCursorPosition(colFin, linFin); Console.Write("╝");
-
-            Console.ForegroundColor = _corTexto;
-        }
-
-        private void DesenharSeparador(int colIni, int colFin, int linha, ConsoleColor corBorda)
-        {
-            Console.ForegroundColor = corBorda;
-            Console.SetCursorPosition(colIni, linha); Console.Write("╠");
-            for (int col = colIni + 1; col < colFin; col++)
-            {
-                Console.SetCursorPosition(col, linha); Console.Write("═");
-            }
-            Console.SetCursorPosition(colFin, linha); Console.Write("╣");
-            Console.ForegroundColor = _corTexto;
-        }
-
-        private void Centralizar(int colIni, int colFin, int linha, string texto, ConsoleColor cor)
-        {
-            int col = colIni + ((colFin - colIni - texto.Length) / 2);
-            Console.ForegroundColor = cor;
-            Console.SetCursorPosition(Math.Max(colIni + 1, col), linha);
-            Console.Write(texto);
-            Console.ForegroundColor = _corTexto;
-        }
-
-        public void Centralizar(int colIni, int colFin, int linha, string texto)
-            => Centralizar(colIni, colFin, linha, texto, _corTexto);
-
-        public void DesenhaMoldura(int colIni, int linIni, int colFin, int linFin)
-            => DesenharCaixaDupla(colIni, linIni, colFin, linFin, _corBorda);
-
-        // ── Tela principal ────────────────────────────────────────────────────
-
-        public void PrepararTela(string titulo, int colIni, int linIni, int colFin, int linFin)
-        {
-            Console.BackgroundColor = _corFundo;
-            Console.ForegroundColor = _corTexto;
+            Console.BackgroundColor = Fundo;
+            Console.ForegroundColor = Texto;
             Console.CursorVisible   = true;
 
-            _limiteColIni = colIni;
-            _limiteLinIni = linIni;
-            _limiteColFin = colFin;
-            _limiteLinFin = linFin;
+            _ci = ci; _li = li; _cf = cf; _lf = lf;
 
             Console.Clear();
 
-            // Moldura principal dupla
-            DesenharCaixaDupla(colIni, linIni, colFin, linFin, _corBorda);
+            MontarMoldura(ci, li, cf, lf);
 
-            // Título em destaque + caixa simples ao redor
-            int titLen  = titulo.Length + 4;
-            int titCol  = colIni + ((colFin - colIni - titLen) / 2);
-            DesenharCaixa(titCol, linIni, titCol + titLen, linIni + 2, _corDestaque);
+            // separador abaixo do título
+            Console.ForegroundColor = Borda;
+            Console.SetCursorPosition(ci, li + 2); Console.Write("╠");
+            for (int c = ci + 1; c < cf; c++) { Console.SetCursorPosition(c, li + 2); Console.Write("═"); }
+            Console.SetCursorPosition(cf, li + 2); Console.Write("╣");
 
-            Console.ForegroundColor = _corTitulo;
-            Console.SetCursorPosition(titCol + 2, linIni + 1);
-            Console.Write(titulo.ToUpper());
+            // título sobre o separador
+            Console.ForegroundColor = Titulo;
+            Centralizar(ci, cf, li + 1, titulo.ToUpper());
 
-            // Linha divisória abaixo do título
-            DesenharSeparador(colIni, colFin, linIni + 2, _corBorda);
-
-            // Rodapé com versão
-            Console.ForegroundColor = _corBorda;
-            Console.SetCursorPosition(colFin - 12, linFin);
+            // versão no rodapé
+            Console.ForegroundColor = Borda;
+            Console.SetCursorPosition(cf - 12, lf);
             Console.Write(" GolPro v1.0 ");
 
-            Console.ForegroundColor = _corTexto;
+            Console.ForegroundColor = Texto;
         }
 
-        // ── Menu interativo (↑↓ + Enter) ─────────────────────────────────────
+        // Centralizar: escreve texto centralizado numa linha
+        public void Centralizar(int ci, int cf, int linha, string texto)
+        {
+            int col = ci + ((cf - ci - texto.Length) / 2);
+            Console.SetCursorPosition(Math.Max(ci + 1, col), linha);
+            Console.Write(texto);
+        }
 
+        // Perguntar: limpa a linha, escreve a pergunta e lê a resposta
+        public string Perguntar(string pergunta, int linha, int ci, int cf)
+        {
+            LimparArea(ci, linha, cf, linha);
+            Console.SetCursorPosition(ci, linha);
+            Console.Write(pergunta);
+            return Console.ReadLine() ?? "";
+        }
+
+        // LimparArea: apaga uma área retangular da tela
+        public void LimparArea(int ci, int li, int cf, int lf)
+        {
+            Console.BackgroundColor = Fundo;
+            for (int y = li; y <= lf; y++)
+            {
+                Console.SetCursorPosition(ci, y);
+                Console.Write(new string(' ', cf - ci + 1));
+            }
+        }
+
+        // MontarMoldura: desenha moldura dupla
+        public void MontarMoldura(int ci, int li, int cf, int lf)
+        {
+            LimparArea(ci, li, cf, lf);
+            Console.ForegroundColor = Borda;
+
+            for (int c = ci + 1; c < cf; c++)
+            {
+                Console.SetCursorPosition(c, li); Console.Write('═');
+                Console.SetCursorPosition(c, lf); Console.Write('═');
+            }
+            for (int l = li + 1; l < lf; l++)
+            {
+                Console.SetCursorPosition(ci, l); Console.Write('║');
+                Console.SetCursorPosition(cf, l); Console.Write('║');
+            }
+
+            Console.SetCursorPosition(ci, li); Console.Write('╔');
+            Console.SetCursorPosition(cf, li); Console.Write('╗');
+            Console.SetCursorPosition(ci, lf); Console.Write('╚');
+            Console.SetCursorPosition(cf, lf); Console.Write('╝');
+
+            Console.ForegroundColor = Texto;
+        }
+
+        // MostrarMenu (assinatura Biblioteca — com posição explícita)
+        public string MostrarMenu(int colIni, int linIni, List<string> opcoes)
+        {
+            int maior  = opcoes.Max(o => o.Length);
+            int colFin = colIni + maior + 5;
+            int linFin = linIni + opcoes.Count + 2;
+            return MenuInterativo(colIni, linIni, colFin, linFin, opcoes);
+        }
+
+        // MostrarMenu (sobrecarga sem posição — calcula o centro)
         public string MostrarMenu(List<string> opcoes)
         {
-            int maior     = opcoes.Max(o => o.Length);
-            int largura   = maior + 6;
-            int altura    = opcoes.Count + 5; // borda + hint top + items + separador + prompt + borda
+            int maior   = opcoes.Max(o => o.Length);
+            int largura = maior + 5;
+            int altura  = opcoes.Count + 2;
 
-            int colIni = _limiteColIni + ((_limiteColFin - _limiteColIni - largura) / 2);
-            int linIni = _limiteLinIni + ((_limiteLinFin - _limiteLinIni - altura) / 2) - 1;
+            int colIni = _ci + ((_cf - _ci - largura) / 2);
+            int linIni = _li + ((_lf - _li - altura) / 2);
             int colFin = colIni + largura;
             int linFin = linIni + altura;
 
-            DesenharCaixa(colIni, linIni, colFin, linFin, _corMenuBorda);
+            return MenuInterativo(colIni, linIni, colFin, linFin, opcoes);
+        }
 
-            // Dica de navegação no topo do menu
-            Console.ForegroundColor = _corBorda;
-            string hint = " ↑↓ Navegar  Enter Confirmar ";
-            int hintCol = colIni + ((colFin - colIni - hint.Length) / 2);
-            Console.SetCursorPosition(hintCol, linIni);
+        //
+        // ── Extensões do GolPro ───────────────────────────────────────────────
+        //
+
+        // MostrarMensagem: sucesso em verde
+        public void MostrarMensagem(string msg, int col, int row)
+        {
+            Console.SetCursorPosition(col, row);
+            Console.Write(new string(' ', 65));
+            Console.ForegroundColor = CorSucesso;
+            Console.SetCursorPosition(col, row);
+            Console.Write($"  ✔  {msg}  [ Enter ]");
+            Console.ForegroundColor = Texto;
+            Console.ReadLine();
+        }
+
+        // MostrarErro: erro em vermelho
+        public void MostrarErro(string msg, int col, int row)
+        {
+            Console.SetCursorPosition(col, row);
+            Console.Write(new string(' ', 65));
+            Console.ForegroundColor = CorErro;
+            Console.SetCursorPosition(col, row);
+            Console.Write($"  ✖  {msg}  [ Enter ]");
+            Console.ForegroundColor = Texto;
+            Console.ReadLine();
+        }
+
+        //
+        // ── Métodos privados ──────────────────────────────────────────────────
+        //
+
+        private string MenuInterativo(int colIni, int linIni, int colFin, int linFin, List<string> opcoes)
+        {
+            int maior = opcoes.Max(o => o.Length);
+
+            // caixa do menu
+            LimparArea(colIni, linIni, colFin, linFin);
+            Console.ForegroundColor = MenuBorda;
+
+            for (int c = colIni + 1; c < colFin; c++)
+            {
+                Console.SetCursorPosition(c, linIni); Console.Write('─');
+                Console.SetCursorPosition(c, linFin); Console.Write('─');
+            }
+            for (int l = linIni + 1; l < linFin; l++)
+            {
+                Console.SetCursorPosition(colIni, l); Console.Write('│');
+                Console.SetCursorPosition(colFin, l); Console.Write('│');
+            }
+            Console.SetCursorPosition(colIni, linIni); Console.Write('┌');
+            Console.SetCursorPosition(colFin, linIni); Console.Write('┐');
+            Console.SetCursorPosition(colIni, linFin); Console.Write('└');
+            Console.SetCursorPosition(colFin, linFin); Console.Write('┘');
+
+            // hint na borda superior
+            string hint = "↑↓ Enter";
+            Console.SetCursorPosition(colFin - hint.Length - 1, linIni);
             Console.Write(hint);
 
             Console.CursorVisible = false;
-
-            int selecionado = 0;
+            int sel = 0;
             ConsoleKey tecla;
 
-            void DesenharOpcoes()
+            void Desenhar()
             {
                 for (int i = 0; i < opcoes.Count; i++)
                 {
-                    Console.SetCursorPosition(colIni + 2, linIni + 1 + i);
-                    if (i == selecionado)
+                    Console.SetCursorPosition(colIni + 1, linIni + 1 + i);
+                    if (i == sel)
                     {
-                        Console.BackgroundColor = _corSelBg;
-                        Console.ForegroundColor = _corSelFg;
+                        Console.BackgroundColor = SelFundo;
+                        Console.ForegroundColor = SelTexto;
                         Console.Write($" ► {opcoes[i].PadRight(maior + 1)}");
                     }
                     else
                     {
-                        Console.BackgroundColor = _corFundo;
-                        Console.ForegroundColor = _corTexto;
+                        Console.BackgroundColor = Fundo;
+                        Console.ForegroundColor = Texto;
                         Console.Write($"   {opcoes[i].PadRight(maior + 1)}");
                     }
-                    Console.BackgroundColor = _corFundo;
-                    Console.ForegroundColor = _corTexto;
+                    Console.BackgroundColor = Fundo;
+                    Console.ForegroundColor = Texto;
                 }
             }
 
             do
             {
-                DesenharOpcoes();
+                Desenhar();
                 tecla = Console.ReadKey(true).Key;
-
-                if (tecla == ConsoleKey.UpArrow)
-                    selecionado = (selecionado - 1 + opcoes.Count) % opcoes.Count;
-                else if (tecla == ConsoleKey.DownArrow)
-                    selecionado = (selecionado + 1) % opcoes.Count;
-
+                if (tecla == ConsoleKey.UpArrow)   sel = (sel - 1 + opcoes.Count) % opcoes.Count;
+                if (tecla == ConsoleKey.DownArrow) sel = (sel + 1) % opcoes.Count;
             } while (tecla != ConsoleKey.Enter);
 
             Console.CursorVisible = true;
-
-            // Extrai o número da opção, ex: "1 - Alterar" → "1"
-            return opcoes[selecionado].Split(' ')[0];
-        }
-
-        // ── Mensagem de feedback ──────────────────────────────────────────────
-
-        public void MostrarMensagem(string msg, int col, int row)
-        {
-            Console.SetCursorPosition(col, row);
-            Console.Write(new string(' ', 65));
-
-            Console.ForegroundColor = _corMensagem;
-            Console.SetCursorPosition(col, row);
-            Console.Write($"  ✔  {msg}");
-
-            Console.ForegroundColor = _corBorda;
-            Console.Write("  [ Enter ]");
-
-            Console.ForegroundColor = _corTexto;
-            Console.ReadLine();
-        }
-
-        public void MostrarErro(string msg, int col, int row)
-        {
-            Console.SetCursorPosition(col, row);
-            Console.Write(new string(' ', 65));
-
-            Console.ForegroundColor = _corErro;
-            Console.SetCursorPosition(col, row);
-            Console.Write($"  ✖  {msg}");
-
-            Console.ForegroundColor = _corBorda;
-            Console.Write("  [ Enter ]");
-
-            Console.ForegroundColor = _corTexto;
-            Console.ReadLine();
+            return opcoes[sel].Split(' ')[0];
         }
     }
 }
