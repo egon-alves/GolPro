@@ -16,7 +16,7 @@ namespace GolPro
 
             // col=2, row=2, width=77, height=22  →  moldura de (2,2) até (79,24)
             TimeController timeController = new TimeController(2, 2, 77, 22, tela);
-            JogadorController jogadorController = new JogadorController(2, 2, 77, 22, tela);
+            JogadorController jogadorController = new JogadorController(2, 2, 77, 22, tela, timeController.Times);
 
             List<string> listMenu = new List<string>
             {

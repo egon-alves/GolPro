@@ -10,11 +10,10 @@ namespace GolPro.Controller
         private int _column, _row, _width, _height;
         private List<string> _fields;
         private List<JogadorModel> _jogadores;
+        private List<TimeModel> _times;
         private Tela _tela;
         private Data _data;
         private JogadorModel _current;
-
-        private List<TimeModel> _times;
 
         public List<JogadorModel> Jogadores
         {
@@ -29,6 +28,7 @@ namespace GolPro.Controller
             this._width = width;
             this._height = height;
             this._tela = tela;
+            this._times = times;
             this._fields = new List<string> { "Matrícula", "Nome", "Posição", "Cód. Time" };
             this._data = new Data("Utils/Data/jogadores.txt");
 
@@ -37,6 +37,16 @@ namespace GolPro.Controller
         }
 
         // ── Busca (privado) ───────────────────────────────────────────────────
+
+        private bool TimeExiste(string codigoTime)
+        {
+            foreach (TimeModel time in _times)
+            {
+                if (time.Codigo.Equals(codigoTime, StringComparison.OrdinalIgnoreCase))
+                    return true;
+            }
+            return false;
+        }
 
         private JogadorModel FindByCode(string matricula)
         {
@@ -48,16 +58,6 @@ namespace GolPro.Controller
             return null;
         }
 
-
-            private bool TimeExiste(string codigoTime)
-            {
-                foreach (TimeModel time in _times)
-                {
-                    if (time.Codigo.Equals(codigoTime, StringComparison.OrdinalIgnoreCase))
-                        return true;
-                }
-                return false;
-            }
         // ── Tela ─────────────────────────────────────────────────────────────
 
         public void ShowForm()
@@ -100,8 +100,20 @@ namespace GolPro.Controller
                 Console.SetCursorPosition(_column + 19, _row + 8);
                 _current.Posicao = Console.ReadLine() ?? "";
 
-                Console.SetCursorPosition(_column + 19, _row + 10);
-                _current.CodigoTime = (Console.ReadLine() ?? "").ToUpper().Trim();
+                string codigoTime;
+                do
+                {
+                    Console.SetCursorPosition(_column + 19, _row + 10);
+                    Console.Write(new string(' ', _width - 21));
+                    Console.SetCursorPosition(_column + 19, _row + 10);
+                    codigoTime = (Console.ReadLine() ?? "").ToUpper().Trim();
+
+                    if (!TimeExiste(codigoTime))
+                        _tela.MostrarMensagem($"Time '{codigoTime}' não encontrado. Tente novamente.", _column + 2, _row + _height - 2);
+
+                } while (!TimeExiste(codigoTime));
+
+                _current.CodigoTime = codigoTime;
             }
         }
 
