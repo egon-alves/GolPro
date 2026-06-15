@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using GolPro.Model;
 using GolPro.utils;
-namespace GolPro.Controller
+namespace GolPro.Controllers
 {
     public class TimeController
     {

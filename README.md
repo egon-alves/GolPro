@@ -105,6 +105,7 @@ Metodos
 - _codigoVisitante: str
 - _data: DateTime
 - _golsMandante: int 
+- _golsVisitante: int
 
 Metodos
 + Placar(): string
