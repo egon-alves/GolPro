@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using GolPro.Model;
 using GolPro.utils;
 
-namespace GolPro.Controllers
+namespace GolPro.Controller
 {
     public class JogadorController
     {
