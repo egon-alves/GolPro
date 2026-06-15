@@ -208,13 +208,14 @@ namespace GolPro.utils
             Console.SetCursorPosition(colFin, linFin); Console.Write('┘');
 
             // hint na borda superior
-            string hint = "↑↓ Enter";
-            Console.SetCursorPosition(colFin - hint.Length - 1, linIni);
-            Console.Write(hint);
+            string hint2 = "↑↓ 0-9 Enter";
+            Console.ForegroundColor = MenuBorda;
+            Console.SetCursorPosition(colFin - hint2.Length - 1, linIni);
+            Console.Write(hint2);
 
             Console.CursorVisible = false;
             int sel = 0;
-            ConsoleKey tecla;
+            bool confirmar = false;
 
             void Desenhar()
             {
@@ -241,10 +242,29 @@ namespace GolPro.utils
             do
             {
                 Desenhar();
-                tecla = Console.ReadKey(true).Key;
-                if (tecla == ConsoleKey.UpArrow)   sel = (sel - 1 + opcoes.Count) % opcoes.Count;
-                if (tecla == ConsoleKey.DownArrow) sel = (sel + 1) % opcoes.Count;
-            } while (tecla != ConsoleKey.Enter);
+                var key = Console.ReadKey(true);
+
+                if (key.Key == ConsoleKey.UpArrow)
+                    sel = (sel - 1 + opcoes.Count) % opcoes.Count;
+                else if (key.Key == ConsoleKey.DownArrow)
+                    sel = (sel + 1) % opcoes.Count;
+                else if (key.Key == ConsoleKey.Enter)
+                    confirmar = true;
+                else if (char.IsDigit(key.KeyChar))
+                {
+                    // procura a opção cujo prefixo bate com o dígito digitado
+                    string digito = key.KeyChar.ToString();
+                    for (int i = 0; i < opcoes.Count; i++)
+                    {
+                        if (opcoes[i].Split(' ')[0] == digito)
+                        {
+                            sel = i;
+                            confirmar = true;
+                            break;
+                        }
+                    }
+                }
+            } while (!confirmar);
 
             Console.CursorVisible = true;
             return opcoes[sel].Split(' ')[0];
