@@ -32,13 +32,13 @@ namespace GolPro.Controller
 
             // registro do pre carregamento
 
-            PartidaModel pPre = new PartidaModel(
-                _proximoId++, "PAL", "FLA", 
-                new DateTime(2026, 3, 10), 1, 3
-            );
-            _partidas.Add(pPre);
-            _timeController.BuscarPorCodigo("PAL")?.RegistrarPartida(1, 3);
-            _timeController.BuscarPorCodigo("FLA")?.RegistrarPartida(3, 1);
+            // PartidaModel pPre = new PartidaModel(
+            //     _proximoId++, "PAL", "FLA", 
+            //     new DateTime(2026, 3, 10), 3, 3
+            // );
+            // _partidas.Add(pPre);
+            // _timeController.BuscarPorCodigo("PAL")?.RegistrarPartida(3, 3);
+            // _timeController.BuscarPorCodigo("FLA")?.RegistrarPartida(3, 3);
         }
 
         // ── Acesso à lista ──────────────────────────────────────────────────

@@ -1,4 +1,10 @@
-PAL;Paalmeiras;;0;0;0;0;0;0
-PAS;PASE;ASDASd;0;0;0;0;0;0
-FLA;FLAMENGO;Rio De Janeiro;0;0;0;0;0;0
-GRE;Gremio;Porto Alegre;0;0;0;0;0;0
+FLA;Flamengo;Rio de Janeiro;0;0;0;0;0;0
+PAL;Palmeiras;São Paulo;0;0;0;0;0;0
+SAO;São Paulo;São Paulo;0;0;0;0;0;0
+COR;Corinthians;São Paulo;0;0;0;0;0;0
+SAN;Santos;Santos;0;0;0;0;0;0
+GRE;Grêmio;Porto Alegre;0;0;0;0;0;0
+INT;Internacional;Porto Alegre;0;0;0;0;0;0
+CRU;Cruzeiro;Belo Horizonte;0;0;0;0;0;0
+ATM;Atlético Mineiro;Belo Horizonte;0;0;0;0;0;0
+BOT;Botafogo;Rio de Janeiro;0;0;0;0;0;0
