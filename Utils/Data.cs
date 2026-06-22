@@ -140,10 +140,21 @@ namespace GolPro.Utils
                 string[] partes = linha.Split(';');
                 if (partes.Length == 6)
                 {
-                    
+                    int.TryParse(partes[0], out int id);
+                    DateTime.TryParseExact(partes[3], "yyyyMMdd",
+                        null, System.Globalization.DateTimeStyles.None, out DateTime data);
+                    int.TryParse(partes[4], out int golsMandante);
+                    int.TryParse(partes[5], out int golsVisitante);
+
+                    PartidaModel partida = new PartidaModel(
+                        id, partes[1], partes[2], data, golsMandante, golsVisitante
+                    );
+                    partidas.Add(partida);
                 }
             }
         }
+
+        return partidas;
     }
     
     }
