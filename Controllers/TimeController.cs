@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using GolPro.Models;
 using GolPro.Utils;
 namespace GolPro.Controller
@@ -78,20 +79,66 @@ namespace GolPro.Controller
         {
             if (which == "PK")
             {
-                // Lê apenas a chave primária (Código)
-                Console.SetCursorPosition(_column + 12, _row + 3);
-                string codigo = (Console.ReadLine() ?? "").ToUpper().Trim();
+                string codigo;
+                while (true)
+                {
+                    Console.SetCursorPosition(_column + 12, _row + 3);
+                    Console.Write(new string(' ', _width - 14));
+                    Console.SetCursorPosition(_column + 12, _row + 3);
+                    codigo = (Console.ReadLine() ?? "").ToUpper().Trim();
+
+                    if (string.IsNullOrEmpty(codigo)) {
+                        _tela.MostrarMensagem("O código não pode ser vazio!", _column + 2, _row + _height - 2);
+                        continue;
+                    }
+                    if (codigo.Length > 3) {
+                        _tela.MostrarMensagem("O código deve ter no máximo 3 letras!", _column + 2, _row + _height - 2);
+                        continue;
+                    }
+                    if (!codigo.All(char.IsLetter)) {
+                        _tela.MostrarMensagem("O código deve conter apenas letras!", _column + 2, _row + _height - 2);
+                        continue;
+                    }
+                    _tela.MostrarMensagem("", _column + 2, _row + _height - 2); // limpa msg erro
+                    break;
+                }
                 _current = new TimeModel();
                 _current.Codigo = codigo;
             }
             else if (which == "DT")
             {
                 // Lê os demais dados (Nome e Cidade)
-                Console.SetCursorPosition(_column + 12, _row + 5);
-                _current.Nome = Console.ReadLine() ?? "";
+                while (true)
+                {
+                    Console.SetCursorPosition(_column + 12, _row + 5);
+                    Console.Write(new string(' ', _width - 14));
+                    Console.SetCursorPosition(_column + 12, _row + 5);
+                    string nome = (Console.ReadLine() ?? "").Trim();
+                    if (string.IsNullOrEmpty(nome) || !nome.Replace(" ", "").All(char.IsLetter))
+                    {
+                        _tela.MostrarMensagem("Nome inválido! Use apenas letras.", _column + 2, _row + _height - 2);
+                        continue;
+                    }
+                    _current.Nome = nome;
+                    _tela.MostrarMensagem("", _column + 2, _row + _height - 2);
+                    break;
+                }
 
-                Console.SetCursorPosition(_column + 12, _row + 7);
-                _current.Cidade = Console.ReadLine() ?? "";
+                while (true)
+                {
+                    Console.SetCursorPosition(_column + 12, _row + 7);
+                    Console.Write(new string(' ', _width - 14));
+                    Console.SetCursorPosition(_column + 12, _row + 7);
+                    string cidade = (Console.ReadLine() ?? "").Trim();
+                    if (string.IsNullOrEmpty(cidade) || !cidade.Replace(" ", "").All(char.IsLetter))
+                    {
+                        _tela.MostrarMensagem("Cidade inválida! Use apenas letras.", _column + 2, _row + _height - 2);
+                        continue;
+                    }
+                    _current.Cidade = cidade;
+                    _tela.MostrarMensagem("", _column + 2, _row + _height - 2);
+                    break;
+                }
             }
         }
 

@@ -8,3 +8,5 @@
 108;Diego Costa;Atacante;GRE;19;2
 109;Alan Patrick;Meia;INT;10;0
 110;Hulk;Atacante;ATM;7;0
+2;9329Geoasd;Zagueriso;PAL;0;0
+TESTE;e;eetet;PAL;0;0

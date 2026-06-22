@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using GolPro.Models;
 using GolPro.Utils;
 
@@ -98,6 +99,20 @@ namespace GolPro.Controller
             {
                 Console.SetCursorPosition(_column + 19, _row + 3);
                 string matricula = (Console.ReadLine() ?? "").ToUpper().Trim();
+
+                if (string.IsNullOrEmpty(matricula))
+                {
+                    int maxMatricula = 0;
+                    foreach(var j in _jogadores) {
+                        if (int.TryParse(j.Matricula, out int mat)) {
+                            if (mat > maxMatricula) maxMatricula = mat;
+                        }
+                    }
+                    matricula = (maxMatricula + 1).ToString();
+                    Console.SetCursorPosition(_column + 19, _row + 3);
+                    Console.Write(matricula);
+                }
+
                 _current = new JogadorModel();
                 _current.Matricula = matricula;
             }
@@ -105,12 +120,40 @@ namespace GolPro.Controller
 
             {
 
-                string[] posicoesValidas = { "Goleiro", "Zagueiro", "Lateral", "Meia", "Atacante" };
-                Console.SetCursorPosition(_column + 19, _row + 5);
-                _current.Nome = Console.ReadLine() ?? "";
+                while (true)
+                {
+                    Console.SetCursorPosition(_column + 19, _row + 5);
+                    Console.Write(new string(' ', _width - 21));
+                    Console.SetCursorPosition(_column + 19, _row + 5);
+                    string nome = (Console.ReadLine() ?? "").Trim();
+                    if (string.IsNullOrEmpty(nome) || !nome.Replace(" ", "").All(char.IsLetter))
+                    {
+                        _tela.MostrarMensagem("Nome inválido! Use apenas letras.", _column + 2, _row + _height - 2);
+                        continue;
+                    }
+                    _current.Nome = nome;
+                    _tela.MostrarMensagem("", _column + 2, _row + _height - 2);
+                    break;
+                }
 
-                Console.SetCursorPosition(_column + 19, _row + 8);
-                _current.Posicao = Console.ReadLine() ?? "";
+                string[] posicoesValidas = { "Goleiro", "Zagueiro", "Lateral", "Volante", "Meia", "Atacante" };
+                while (true)
+                {
+                    Console.SetCursorPosition(_column + 19, _row + 8);
+                    Console.Write(new string(' ', _width - 21));
+                    Console.SetCursorPosition(_column + 19, _row + 8);
+                    string posicao = (Console.ReadLine() ?? "").Trim();
+
+                    var posEncontrada = posicoesValidas.FirstOrDefault(p => p.Equals(posicao, StringComparison.OrdinalIgnoreCase));
+                    if (posEncontrada == null)
+                    {
+                        _tela.MostrarMensagem("Posição inválida! Tente: " + string.Join(", ", posicoesValidas), _column + 2, _row + _height - 2);
+                        continue;
+                    }
+                    _current.Posicao = posEncontrada;
+                    _tela.MostrarMensagem("", _column + 2, _row + _height - 2);
+                    break;
+                }
 
                 string codigoTime;
                 do

@@ -94,32 +94,111 @@ namespace GolPro.Controller
 
          if(which == "PK"){
             Console.SetCursorPosition(_column + 20, _row + 3);
-            int.TryParse(Console.ReadLine(), out int id);
+            string entradaId = Console.ReadLine() ?? "";
+            int id;
+            if (string.IsNullOrWhiteSpace(entradaId)) {
+                id = _proximoId;
+                Console.SetCursorPosition(_column + 20, _row + 3);
+                Console.Write(id);
+            } else {
+                int.TryParse(entradaId, out id);
+            }
             _current = new PartidaModel();
             _current.Id = id;
 
-            
-
          }else if(which == "DT") {
-            
-                Console.SetCursorPosition(_column + 20, _row + 5);
-                _current.CodigoMandante = (Console.ReadLine() ?? "").ToUpper().Trim();
+                string codMandante;
+                while(true) {
+                    Console.SetCursorPosition(_column + 20, _row + 5);
+                    Console.Write(new string(' ', _width - 22));
+                    Console.SetCursorPosition(_column + 20, _row + 5);
+                    codMandante = (Console.ReadLine() ?? "").ToUpper().Trim();
 
-                Console.SetCursorPosition(_column + 20, _row + 7);
-                _current.CodigoVisitante = (Console.ReadLine() ?? "").ToUpper().Trim();
+                    if (string.IsNullOrEmpty(codMandante)) {
+                        _tela.MostrarMensagem("O time Mandante não pode ser vazio!", _column + 2, _row + _height - 2);
+                        continue;
+                    }
+                    if (_timeController.BuscarPorCodigo(codMandante) == null) {
+                        _tela.MostrarMensagem($"Time '{codMandante}' não cadastrado!", _column + 2, _row + _height - 2);
+                        continue;
+                    }
+                    _current.CodigoMandante = codMandante;
+                    _tela.MostrarMensagem("", _column + 2, _row + _height - 2);
+                    break;
+                }
 
-                Console.SetCursorPosition(_column + 20, _row + 9);
-                string dataStr = Console.ReadLine() ?? "";
-                DateTime.TryParseExact(dataStr, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime data);
-                _current.Data = data;
+                string codVisitante;
+                while(true) {
+                    Console.SetCursorPosition(_column + 20, _row + 7);
+                    Console.Write(new string(' ', _width - 22));
+                    Console.SetCursorPosition(_column + 20, _row + 7);
+                    codVisitante = (Console.ReadLine() ?? "").ToUpper().Trim();
 
-                Console.SetCursorPosition(_column + 20, _row + 11);
-                int.TryParse(Console.ReadLine(), out int golsMandante);
-                _current.GolsMandante = golsMandante;
+                    if (string.IsNullOrEmpty(codVisitante)) {
+                        _tela.MostrarMensagem("O time Visitante não pode ser vazio!", _column + 2, _row + _height - 2);
+                        continue;
+                    }
+                    if (_timeController.BuscarPorCodigo(codVisitante) == null) {
+                        _tela.MostrarMensagem($"Time '{codVisitante}' não cadastrado!", _column + 2, _row + _height - 2);
+                        continue;
+                    }
+                    if (codVisitante == codMandante) {
+                        _tela.MostrarMensagem("Visitante não pode ser igual ao Mandante!", _column + 2, _row + _height - 2);
+                        continue;
+                    }
+                    _current.CodigoVisitante = codVisitante;
+                    _tela.MostrarMensagem("", _column + 2, _row + _height - 2);
+                    break;
+                }
 
-                Console.SetCursorPosition(_column + 20, _row + 13);
-                int.TryParse(Console.ReadLine(), out int golsVisitante);
-                _current.GolsVisitante = golsVisitante;
+                while(true) {
+                    Console.SetCursorPosition(_column + 20, _row + 9);
+                    Console.Write(new string(' ', _width - 22));
+                    Console.SetCursorPosition(_column + 20, _row + 9);
+                    string dataStr = Console.ReadLine() ?? "";
+                    if (string.IsNullOrWhiteSpace(dataStr)) {
+                        _current.Data = DateTime.Now.Date;
+                        Console.SetCursorPosition(_column + 20, _row + 9);
+                        Console.Write(_current.Data.ToString("dd/MM/yyyy"));
+                        break;
+                    }
+                    
+                    if (DateTime.TryParseExact(dataStr, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime data)) {
+                        _current.Data = data;
+                        _tela.MostrarMensagem("", _column + 2, _row + _height - 2);
+                        break;
+                    } else {
+                        _tela.MostrarMensagem("Data inválida! Use o formato dd/MM/yyyy ou deixe vazio.", _column + 2, _row + _height - 2);
+                    }
+                }
+
+                while(true) {
+                    Console.SetCursorPosition(_column + 20, _row + 11);
+                    Console.Write(new string(' ', _width - 22));
+                    Console.SetCursorPosition(_column + 20, _row + 11);
+                    string gmStr = Console.ReadLine() ?? "";
+                    if (int.TryParse(gmStr, out int gm) && gm >= 0) {
+                        _current.GolsMandante = gm;
+                        _tela.MostrarMensagem("", _column + 2, _row + _height - 2);
+                        break;
+                    } else {
+                        _tela.MostrarMensagem("Valor inválido! Digite um número >= 0.", _column + 2, _row + _height - 2);
+                    }
+                }
+
+                while(true) {
+                    Console.SetCursorPosition(_column + 20, _row + 13);
+                    Console.Write(new string(' ', _width - 22));
+                    Console.SetCursorPosition(_column + 20, _row + 13);
+                    string gvStr = Console.ReadLine() ?? "";
+                    if (int.TryParse(gvStr, out int gv) && gv >= 0) {
+                        _current.GolsVisitante = gv;
+                        _tela.MostrarMensagem("", _column + 2, _row + _height - 2);
+                        break;
+                    } else {
+                        _tela.MostrarMensagem("Valor inválido! Digite um número >= 0.", _column + 2, _row + _height - 2);
+                    }
+                }
          }  
 
 
