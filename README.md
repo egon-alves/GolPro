@@ -12,11 +12,11 @@ tabela de classificação.
 
 # Começa o trabalho de desenvolvimento do sistema, seguindo as regras de negócio e requisitos do enunciado
 
-# Regra de Negocio
+# 3 - Regra de Negocio
 
 
 
-# Requisitos Funcionais
+# 4 - Requisitos Funcionais
 
 RF01 - O sistema deve permitir o cadastro de times, incluindo código, nome e cidade. 
 RF03 - O sistem deve permitir o cadastro de jogadores, incluindo matrícula, nome, posição e vínculo ao time.

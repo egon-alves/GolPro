@@ -1,2 +1,2 @@
-Aluno(s):
-Nota escolhida:
+Nome: Egon Alves
+Nível de nota escolhido: 10 (ou Bônus)
