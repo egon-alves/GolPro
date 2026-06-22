@@ -1,5 +1,5 @@
-FLA;Flamengo;Rio de Janeiro;0;0;0;0;0;0
-PAL;Palmeiras;São Paulo;0;0;0;0;0;0
+FLA;Flamengo;Rio de Janeiro;0;0;0;1;1;2
+PAL;Palmeiras;São Paulo;3;1;0;0;2;1
 SAO;São Paulo;São Paulo;0;0;0;0;0;0
 COR;Corinthians;São Paulo;0;0;0;0;0;0
 SAN;Santos;Santos;0;0;0;0;0;0

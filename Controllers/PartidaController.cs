@@ -10,6 +10,7 @@ namespace GolPro.Controller
         private Tela              _tela;
         private TimeController    _timeController;
         private JogadorController _jogadorController;
+        private Data _data;
 
         private List<PartidaModel> _partidas;
         private PartidaModel _current;
@@ -27,8 +28,13 @@ namespace GolPro.Controller
             _tela = tela;
             _timeController = timeCtrl;
             _jogadorController = jogCtrl;
-            _partidas = new List<PartidaModel>();
-            _proximoId = 1;
+            _data = new Data("Utils/Data/partidas.txt");
+            _partidas = _data.CarregarPartidas();
+
+            if (_partidas.Count > 0)
+                _proximoId = _partidas[_partidas.Count - 1].Id + 1;
+            else
+                _proximoId = 1;
 
             // registro do pre carregamento
 
@@ -262,6 +268,8 @@ namespace GolPro.Controller
                         ?.RegistrarPartida(encontrado.GolsVisitante, encontrado.GolsMandante);
                     
                     _jogadorController.Salvar();
+                    _timeController.Salvar();
+                    _data.SalvarPartidas(_partidas);
 
                     _tela.MostrarMensagem("Partida alterada com sucesso!", _column + 2, _row + _height - 2);
                 }
@@ -282,6 +290,8 @@ namespace GolPro.Controller
 
                         _partidas.Remove(encontrado);
                         _jogadorController.Salvar();
+                        _timeController.Salvar();
+                        _data.SalvarPartidas(_partidas);
 
                         _tela.MostrarMensagem("Partida excluída com sucesso!", _column + 2, _row + _height - 2);
                     }
@@ -326,6 +336,8 @@ namespace GolPro.Controller
                         ?.RegistrarPartida(nova.GolsVisitante, nova.GolsMandante);
                     
                     _jogadorController.Salvar();
+                    _timeController.Salvar();
+                    _data.SalvarPartidas(_partidas);
 
                     _tela.MostrarMensagem("Partida registrada com sucesso!", _column + 2, _row + _height - 2);
                 }

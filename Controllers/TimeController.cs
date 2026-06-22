@@ -53,6 +53,11 @@ namespace GolPro.Controller
             return FindByCode(codigo);
         }
 
+        public void Salvar()
+        {
+            _data.SalvarTimes(_times);
+        }
+
         // ── Tela ─────────────────────────────────────────────────────────────
 
         public void ShowForm()

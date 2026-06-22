@@ -1,7 +1,7 @@
 101;Pedro;Atacante;FLA;9;0
-102;Arrascaeta;Meia;FLA;14;0
+102;Arrascaeta;Meia;FLA;14;1
 103;Dudu;Atacante;PAL;7;0
-104;Raphael Veiga;Meia;PAL;23;6
+104;Raphael Veiga;Meia;PAL;23;8
 105;Calleri;Atacante;SAO;9;0
 106;Yuri Alberto;Atacante;COR;9;0
 107;Joao Paulo;Goleiro;SAN;1;0
