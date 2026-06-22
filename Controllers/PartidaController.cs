@@ -6,6 +6,7 @@ namespace GolPro.Controller
 {
     public class PartidaController
     {
+        private int _column, _row, _width, _height;
         private Tela              _tela;
         private TimeController    _timeController;
         private JogadorController _jogadorController;
@@ -14,10 +15,14 @@ namespace GolPro.Controller
 
         private int _proximoId;
 
-      // VOu montar um construtor 
+      // Construtor seguindo o padrão dos outros controllers
 
-      public PartidaController(Tela tela, TimeController timeCtrl, JogadorController jogCtrl)
+      public PartidaController(int col, int row, int width, int height, Tela tela, TimeController timeCtrl, JogadorController jogCtrl)
         {
+            _column = col;
+            _row    = row;
+            _width  = width;
+            _height = height;
             _tela = tela;
             _timeController = timeCtrl;
             _jogadorController = jogCtrl;
@@ -31,36 +36,33 @@ namespace GolPro.Controller
                 new DateTime(2026,3,10), 1,3
             );
             _partidas.Add(pPre);
-            _timeController.BuscarPorCodigo("PAL")?.RegistrarResultado(2, 1);
-            _timeController.BuscarPorCodigo("FLA")?.RegistrarResultado(1, 2);
-
-                    // ── Acesso à lista ──────────────────────────────────────────────────
-
-            public List<PartidaModel> ObterTodos()   { return _partidas; }
-            public int                ObterProximoId() { return _proximoId; }
-
-            public void DefinirLista(List<PartidaModel> lista, int proximoId)
-            {
-                _partidas   = lista;
-                _proximoId  = proximoId;
-            }
-
-                    /// <summary>Localiza uma partida pelo ID.</summary>
-            private PartidaModel FindById(int id)
-            {
-                foreach (PartidaModel p in _partidas)
-                    if (p.Id == id)
-                        return p;
-                return null;
-            }
-
-            private void ShowForm()
-        {
-            
+            _timeController.BuscarPorCodigo("PAL")?.RegistrarPartida(1, 3);
+            _timeController.BuscarPorCodigo("FLA")?.RegistrarPartida(3, 1);
         }
 
+        // ── Acesso à lista ──────────────────────────────────────────────────
 
+        public List<PartidaModel> ObterTodos()   { return _partidas; }
+        public int                ObterProximoId() { return _proximoId; }
 
+        public void DefinirLista(List<PartidaModel> lista, int proximoId)
+        {
+            _partidas   = lista;
+            _proximoId  = proximoId;
+        }
+
+        /// <summary>Localiza uma partida pelo ID.</summary>
+        private PartidaModel FindById(int id)
+        {
+            foreach (PartidaModel p in _partidas)
+                if (p.Id == id)
+                    return p;
+            return null;
+        }
+
+        private void ShowForm()
+        {
+            
         }
     }
 }

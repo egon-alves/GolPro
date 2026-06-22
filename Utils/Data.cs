@@ -1,8 +1,8 @@
 using System.IO;
 using System.Collections.Generic;
-using GolPro.Model;
+using GolPro.Models;
 
-namespace GolPro.utils
+namespace GolPro.Utils
 {
     public class Data
     {
