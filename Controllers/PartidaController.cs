@@ -115,15 +115,15 @@ namespace GolPro.Controller
                     codMandante = (Console.ReadLine() ?? "").ToUpper().Trim();
 
                     if (string.IsNullOrEmpty(codMandante)) {
-                        _tela.MostrarMensagem("O time Mandante não pode ser vazio!", _column + 2, _row + _height - 2);
+                        _tela.MostrarErroInLine("O time Mandante não pode ser vazio!", _column + 2, _row + _height - 2);
                         continue;
                     }
                     if (_timeController.BuscarPorCodigo(codMandante) == null) {
-                        _tela.MostrarMensagem($"Time '{codMandante}' não cadastrado!", _column + 2, _row + _height - 2);
+                        _tela.MostrarErroInLine($"Time '{codMandante}' não cadastrado!", _column + 2, _row + _height - 2);
                         continue;
                     }
                     _current.CodigoMandante = codMandante;
-                    _tela.MostrarMensagem("", _column + 2, _row + _height - 2);
+                    _tela.MostrarErroInLine("", _column + 2, _row + _height - 2);
                     break;
                 }
 
@@ -135,19 +135,19 @@ namespace GolPro.Controller
                     codVisitante = (Console.ReadLine() ?? "").ToUpper().Trim();
 
                     if (string.IsNullOrEmpty(codVisitante)) {
-                        _tela.MostrarMensagem("O time Visitante não pode ser vazio!", _column + 2, _row + _height - 2);
+                        _tela.MostrarErroInLine("O time Visitante não pode ser vazio!", _column + 2, _row + _height - 2);
                         continue;
                     }
                     if (_timeController.BuscarPorCodigo(codVisitante) == null) {
-                        _tela.MostrarMensagem($"Time '{codVisitante}' não cadastrado!", _column + 2, _row + _height - 2);
+                        _tela.MostrarErroInLine($"Time '{codVisitante}' não cadastrado!", _column + 2, _row + _height - 2);
                         continue;
                     }
                     if (codVisitante == codMandante) {
-                        _tela.MostrarMensagem("Visitante não pode ser igual ao Mandante!", _column + 2, _row + _height - 2);
+                        _tela.MostrarErroInLine("Visitante não pode ser igual ao Mandante!", _column + 2, _row + _height - 2);
                         continue;
                     }
                     _current.CodigoVisitante = codVisitante;
-                    _tela.MostrarMensagem("", _column + 2, _row + _height - 2);
+                    _tela.MostrarErroInLine("", _column + 2, _row + _height - 2);
                     break;
                 }
 
@@ -165,10 +165,10 @@ namespace GolPro.Controller
                     
                     if (DateTime.TryParseExact(dataStr, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime data)) {
                         _current.Data = data;
-                        _tela.MostrarMensagem("", _column + 2, _row + _height - 2);
+                        _tela.MostrarErroInLine("", _column + 2, _row + _height - 2);
                         break;
                     } else {
-                        _tela.MostrarMensagem("Data inválida! Use o formato dd/MM/yyyy ou deixe vazio.", _column + 2, _row + _height - 2);
+                        _tela.MostrarErroInLine("Data inválida! Use o formato dd/MM/yyyy ou deixe vazio.", _column + 2, _row + _height - 2);
                     }
                 }
 
@@ -179,10 +179,10 @@ namespace GolPro.Controller
                     string gmStr = Console.ReadLine() ?? "";
                     if (int.TryParse(gmStr, out int gm) && gm >= 0) {
                         _current.GolsMandante = gm;
-                        _tela.MostrarMensagem("", _column + 2, _row + _height - 2);
+                        _tela.MostrarErroInLine("", _column + 2, _row + _height - 2);
                         break;
                     } else {
-                        _tela.MostrarMensagem("Valor inválido! Digite um número >= 0.", _column + 2, _row + _height - 2);
+                        _tela.MostrarErroInLine("Valor inválido! Digite um número >= 0.", _column + 2, _row + _height - 2);
                     }
                 }
 
@@ -193,10 +193,10 @@ namespace GolPro.Controller
                     string gvStr = Console.ReadLine() ?? "";
                     if (int.TryParse(gvStr, out int gv) && gv >= 0) {
                         _current.GolsVisitante = gv;
-                        _tela.MostrarMensagem("", _column + 2, _row + _height - 2);
+                        _tela.MostrarErroInLine("", _column + 2, _row + _height - 2);
                         break;
                     } else {
-                        _tela.MostrarMensagem("Valor inválido! Digite um número >= 0.", _column + 2, _row + _height - 2);
+                        _tela.MostrarErroInLine("Valor inválido! Digite um número >= 0.", _column + 2, _row + _height - 2);
                     }
                 }
          }  

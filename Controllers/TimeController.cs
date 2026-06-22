@@ -88,18 +88,18 @@ namespace GolPro.Controller
                     codigo = (Console.ReadLine() ?? "").ToUpper().Trim();
 
                     if (string.IsNullOrEmpty(codigo)) {
-                        _tela.MostrarMensagem("O código não pode ser vazio!", _column + 2, _row + _height - 2);
+                        _tela.MostrarErroInLine("O código não pode ser vazio!", _column + 2, _row + _height - 2);
                         continue;
                     }
                     if (codigo.Length > 3) {
-                        _tela.MostrarMensagem("O código deve ter no máximo 3 letras!", _column + 2, _row + _height - 2);
+                        _tela.MostrarErroInLine("O código deve ter no máximo 3 letras!", _column + 2, _row + _height - 2);
                         continue;
                     }
                     if (!codigo.All(char.IsLetter)) {
-                        _tela.MostrarMensagem("O código deve conter apenas letras!", _column + 2, _row + _height - 2);
+                        _tela.MostrarErroInLine("O código deve conter apenas letras!", _column + 2, _row + _height - 2);
                         continue;
                     }
-                    _tela.MostrarMensagem("", _column + 2, _row + _height - 2); // limpa msg erro
+                    _tela.MostrarErroInLine("", _column + 2, _row + _height - 2); // limpa msg erro
                     break;
                 }
                 _current = new TimeModel();
@@ -116,11 +116,11 @@ namespace GolPro.Controller
                     string nome = (Console.ReadLine() ?? "").Trim();
                     if (string.IsNullOrEmpty(nome) || !nome.Replace(" ", "").All(char.IsLetter))
                     {
-                        _tela.MostrarMensagem("Nome inválido! Use apenas letras.", _column + 2, _row + _height - 2);
+                        _tela.MostrarErroInLine("Nome inválido! Use apenas letras.", _column + 2, _row + _height - 2);
                         continue;
                     }
                     _current.Nome = nome;
-                    _tela.MostrarMensagem("", _column + 2, _row + _height - 2);
+                    _tela.MostrarErroInLine("", _column + 2, _row + _height - 2);
                     break;
                 }
 
@@ -132,11 +132,11 @@ namespace GolPro.Controller
                     string cidade = (Console.ReadLine() ?? "").Trim();
                     if (string.IsNullOrEmpty(cidade) || !cidade.Replace(" ", "").All(char.IsLetter))
                     {
-                        _tela.MostrarMensagem("Cidade inválida! Use apenas letras.", _column + 2, _row + _height - 2);
+                        _tela.MostrarErroInLine("Cidade inválida! Use apenas letras.", _column + 2, _row + _height - 2);
                         continue;
                     }
                     _current.Cidade = cidade;
-                    _tela.MostrarMensagem("", _column + 2, _row + _height - 2);
+                    _tela.MostrarErroInLine("", _column + 2, _row + _height - 2);
                     break;
                 }
             }

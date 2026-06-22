@@ -128,11 +128,11 @@ namespace GolPro.Controller
                     string nome = (Console.ReadLine() ?? "").Trim();
                     if (string.IsNullOrEmpty(nome) || !nome.Replace(" ", "").All(char.IsLetter))
                     {
-                        _tela.MostrarMensagem("Nome inválido! Use apenas letras.", _column + 2, _row + _height - 2);
+                        _tela.MostrarErroInLine("Nome inválido! Use apenas letras.", _column + 2, _row + _height - 2);
                         continue;
                     }
                     _current.Nome = nome;
-                    _tela.MostrarMensagem("", _column + 2, _row + _height - 2);
+                    _tela.MostrarErroInLine("", _column + 2, _row + _height - 2);
                     break;
                 }
 
@@ -147,11 +147,11 @@ namespace GolPro.Controller
                     var posEncontrada = posicoesValidas.FirstOrDefault(p => p.Equals(posicao, StringComparison.OrdinalIgnoreCase));
                     if (posEncontrada == null)
                     {
-                        _tela.MostrarMensagem("Posição inválida! Tente: " + string.Join(", ", posicoesValidas), _column + 2, _row + _height - 2);
+                        _tela.MostrarErroInLine("Posição inválida! Tente: " + string.Join(", ", posicoesValidas), _column + 2, _row + _height - 2);
                         continue;
                     }
                     _current.Posicao = posEncontrada;
-                    _tela.MostrarMensagem("", _column + 2, _row + _height - 2);
+                    _tela.MostrarErroInLine("", _column + 2, _row + _height - 2);
                     break;
                 }
 
@@ -164,7 +164,7 @@ namespace GolPro.Controller
                     codigoTime = (Console.ReadLine() ?? "").ToUpper().Trim();
 
                     if (!TimeExiste(codigoTime))
-                        _tela.MostrarMensagem($"Time '{codigoTime}' não encontrado. Tente novamente.", _column + 2, _row + _height - 2);
+                        _tela.MostrarErroInLine($"Time '{codigoTime}' não encontrado. Tente novamente.", _column + 2, _row + _height - 2);
 
                 } while (!TimeExiste(codigoTime));
 

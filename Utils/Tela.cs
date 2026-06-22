@@ -180,6 +180,19 @@ namespace GolPro.Utils
             Console.ReadLine();
         }
 
+        // MostrarErroInLine: exibe o erro sem pausar a tela (ideal para loops de validação)
+        public void MostrarErroInLine(string msg, int col, int row)
+        {
+            Console.SetCursorPosition(col, row);
+            Console.Write(new string(' ', 65));
+            if (!string.IsNullOrEmpty(msg)) {
+                Console.ForegroundColor = CorErro;
+                Console.SetCursorPosition(col, row);
+                Console.Write($"  ✖  {msg}");
+                Console.ForegroundColor = Texto;
+            }
+        }
+
         //
         // ── Métodos privados ──────────────────────────────────────────────────
         //

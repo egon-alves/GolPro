@@ -1,9 +1,9 @@
-FLA;Flamengo;Rio de Janeiro;0;0;0;1;1;2
-PAL;Palmeiras;São Paulo;3;1;0;0;2;1
+FLA;Flamengo;Rio de Janeiro;0;0;0;2;1;3
+PAL;Palmeiras;São Paulo;9;3;0;0;4;1
 SAO;São Paulo;São Paulo;0;0;0;0;0;0
 COR;Corinthians;São Paulo;0;0;0;0;0;0
 SAN;Santos;Santos;0;0;0;0;0;0
-GRE;Grêmio;Porto Alegre;0;0;0;0;0;0
+GRE;Grêmio;Porto Alegre;0;0;0;1;0;1
 INT;Internacional;Porto Alegre;0;0;0;0;0;0
 CRU;Cruzeiro;Belo Horizonte;0;0;0;0;0;0
 ATM;Atlético Mineiro;Belo Horizonte;0;0;0;0;0;0
