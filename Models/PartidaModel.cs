@@ -1,6 +1,6 @@
 using System;
 
-namespace GolPro.Model
+namespace GolPro.Models
 {
     public class PartidaModel
     {
@@ -46,7 +46,7 @@ namespace GolPro.Model
 
         }
 
-                public int GolVisitante
+        public int GolsVisitante
         {
             get { return _golsVisitante; }
             set { _golsVisitante = value; }
@@ -86,11 +86,10 @@ namespace GolPro.Model
 
         public string Serializar()
         {
-                    {
-            return $"{_id}|{_codigoMandante}|{_codigoVisitante}|{_data:yyyyMMdd}|{_golsMandante}|{_golsVisitante}";
+            return $"{_id};{_codigoMandante};{_codigoVisitante};{_data:yyyyMMdd};{_golsMandante};{_golsVisitante}";
         }
             
-        }
+        
 
     }
 

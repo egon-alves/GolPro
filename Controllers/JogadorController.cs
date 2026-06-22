@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using GolPro.Model;
-using GolPro.utils;
+using GolPro.Models;
+using GolPro.Utils;
 
 namespace GolPro.Controller
 {

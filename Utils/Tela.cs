@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace GolPro.utils
+namespace GolPro.Utils
 {
     public class Tela
     {

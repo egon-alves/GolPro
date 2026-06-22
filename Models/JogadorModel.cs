@@ -1,6 +1,6 @@
 using System;
 
-namespace GolPro.Model
+namespace GolPro.Models
 {
     public class JogadorModel
     {
