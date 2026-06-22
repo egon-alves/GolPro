@@ -60,6 +60,16 @@ namespace GolPro.Controller
             return null;
         }
 
+        public JogadorModel BuscarPorMatricula(string matricula)
+        {
+            return FindByCode(matricula);
+        }
+
+        public void Salvar()
+        {
+            _data.SalvarJogador(_jogadores);
+        }
+
         // ── Tela ─────────────────────────────────────────────────────────────
 
         public void ShowForm()

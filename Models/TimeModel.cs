@@ -71,6 +71,11 @@ namespace GolPro.Models
             set { _golsContra = value; }
         }
 
+        public int SaldoGols
+        {
+            get { return _golsPro - _golsContra; }
+        }
+
 
         // Metodo construtor - pode ser expandido para receber parâmetros ou realizar validações
 

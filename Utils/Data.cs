@@ -138,7 +138,7 @@ namespace GolPro.Utils
             while ((linha = sr.ReadLine()) != null)
             {
                 string[] partes = linha.Split(';');
-                if (partes.Length == 6)
+                if (partes.Length >= 6) // Aceita tanto partidas antigas (6) quanto novas com listas de gols (8)
                 {
                     int.TryParse(partes[0], out int id);
                     DateTime.TryParseExact(partes[3], "yyyyMMdd",
@@ -149,6 +149,15 @@ namespace GolPro.Utils
                     PartidaModel partida = new PartidaModel(
                         id, partes[1], partes[2], data, golsMandante, golsVisitante
                     );
+
+                    if (partes.Length >= 8)
+                    {
+                        if (!string.IsNullOrWhiteSpace(partes[6]))
+                            partida.GolsMandanteMatriculas.AddRange(partes[6].Split(','));
+                        if (!string.IsNullOrWhiteSpace(partes[7]))
+                            partida.GolsVisitanteMatriculas.AddRange(partes[7].Split(','));
+                    }
+
                     partidas.Add(partida);
                 }
             }

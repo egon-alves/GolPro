@@ -56,15 +56,11 @@ namespace GolPro
                     partidaController.CRUD();
                 }
                 else if(menuEscolhido == "4") {
-                    Console.Clear();
-                    Console.WriteLine("Tabela de Classificação - Em breve");
-                    Console.ReadKey();
+                    partidaController.Relatorio();
                 }
 
                 else if(menuEscolhido == "5") {
-                    Console.Clear();
-                    Console.WriteLine("Estatísticas de Jogadores - Em breve");
-                    Console.ReadKey();
+                    partidaController.ReportArtilheiros();
                 }
 
             }

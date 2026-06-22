@@ -152,32 +152,55 @@ namespace GolPro.Controller
             Console.Write(_current.GolsVisitante);
         }
 
-        // ── CRUD ──────────────────────────────────────────────────────────────
-        // Fluxo principal do registro de partidas.
-        // Segue o mesmo padrão do TimeController.CRUD():
-        //   1. Mostra formulário e lê a chave primária (ID)
-        //   2. Se encontrou → oferece Alterar ou Excluir
-        //   3. Se não encontrou → oferece Incluir
-        //
-        // DIFERENÇA em relação ao Time/Jogador:
-        //   Ao incluir/alterar/excluir uma partida, as estatísticas dos dois
-        //   times envolvidos (pontos, vitórias, gols, etc.) precisam ser
-        //   atualizadas via RegistrarPartida() / EstornarResultado().
+        // ── Auxiliares para Gols de Jogadores ────────────────────────────────
 
+        private void EstornarGolsJogadores(List<string> matriculas)
+        {
+            foreach (string mat in matriculas)
+            {
+                JogadorModel jog = _jogadorController.BuscarPorMatricula(mat);
+                jog?.EstournarGols(1);
+            }
+        }
+
+        private void RegistrarGolsJogadores(int quantidadeGols, string codigoTime, List<string> listaMatriculas, string tipoTime)
+        {
+            listaMatriculas.Clear();
+            for (int i = 0; i < quantidadeGols; i++)
+            {
+                while (true)
+                {
+                    Console.SetCursorPosition(_column + 2, _row + _height - 3);
+                    Console.Write(new string(' ', _width - 4));
+                    Console.SetCursorPosition(_column + 2, _row + _height - 3);
+                    Console.Write($"Matrícula de quem fez o gol {i + 1} do {tipoTime} ({codigoTime}): ");
+                    string mat = (Console.ReadLine() ?? "").ToUpper().Trim();
+
+                    JogadorModel jog = _jogadorController.BuscarPorMatricula(mat);
+                    if (jog != null && jog.CodigoTime == codigoTime)
+                    {
+                        listaMatriculas.Add(mat);
+                        jog.AdicionarGols(1);
+                        break;
+                    }
+                    else
+                    {
+                        _tela.MostrarMensagem("Jogador não encontrado ou não é deste time!", _column + 2, _row + _height - 2);
+                    }
+                }
+            }
+        }
+
+        // ── CRUD ──────────────────────────────────────────────────────────────
         public void CRUD()
         {
-            // ── PASSO 1: Mostra formulário e lê o ID ─────────────────────
             ShowForm();
             EnterData("PK");
 
-            // ── PASSO 2: Busca a partida pelo ID ─────────────────────────
             PartidaModel encontrado = FindById(_current.Id);
 
             if (encontrado != null)
             {
-                // ══════════════════════════════════════════════════════════
-                // PARTIDA ENCONTRADA — exibe dados e oferece Alterar/Excluir
-                // ══════════════════════════════════════════════════════════
                 _current = encontrado;
                 ShowData();
 
@@ -190,51 +213,55 @@ namespace GolPro.Controller
 
                 if (opcao == "1")
                 {
-                    // ── ALTERAR ───────────────────────────────────────────
-                    // 1) Estorna as estatísticas ANTIGAS dos dois times
-                    //    (desfaz o efeito da partida anterior)
+                    // 1) Estorna as estatísticas ANTIGAS
                     _timeController.BuscarPorCodigo(encontrado.CodigoMandante)
                         ?.EstornarResultado(encontrado.GolsMandante, encontrado.GolsVisitante);
                     _timeController.BuscarPorCodigo(encontrado.CodigoVisitante)
                         ?.EstornarResultado(encontrado.GolsVisitante, encontrado.GolsMandante);
+                    EstornarGolsJogadores(encontrado.GolsMandanteMatriculas);
+                    EstornarGolsJogadores(encontrado.GolsVisitanteMatriculas);
 
-                    // 2) Redesenha o form com os dados atuais e pede novos dados
                     ShowForm();
                     ShowData();
                     EnterData("DT");
 
-                    // 3) Atualiza os campos do registro encontrado
                     encontrado.CodigoMandante  = _current.CodigoMandante;
                     encontrado.CodigoVisitante = _current.CodigoVisitante;
                     encontrado.Data            = _current.Data;
                     encontrado.GolsMandante    = _current.GolsMandante;
                     encontrado.GolsVisitante   = _current.GolsVisitante;
 
-                    // 4) Registra as estatísticas NOVAS nos dois times
+                    // 2) Pergunta quem fez os gols
+                    RegistrarGolsJogadores(encontrado.GolsMandante, encontrado.CodigoMandante, encontrado.GolsMandanteMatriculas, "Mandante");
+                    RegistrarGolsJogadores(encontrado.GolsVisitante, encontrado.CodigoVisitante, encontrado.GolsVisitanteMatriculas, "Visitante");
+
+                    // 3) Registra as estatísticas NOVAS e salva
                     _timeController.BuscarPorCodigo(encontrado.CodigoMandante)
                         ?.RegistrarPartida(encontrado.GolsMandante, encontrado.GolsVisitante);
                     _timeController.BuscarPorCodigo(encontrado.CodigoVisitante)
                         ?.RegistrarPartida(encontrado.GolsVisitante, encontrado.GolsMandante);
+                    
+                    _jogadorController.Salvar();
 
                     _tela.MostrarMensagem("Partida alterada com sucesso!", _column + 2, _row + _height - 2);
                 }
                 else if (opcao == "2")
                 {
-                    // ── EXCLUIR ──────────────────────────────────────────
                     Console.SetCursorPosition(_column + 2, _row + _height - 2);
                     Console.Write($"Confirma exclusão da partida {encontrado.Id}? (S/N): ");
                     string resp = (Console.ReadLine() ?? "").ToUpper();
 
                     if (resp == "S")
                     {
-                        // 1) Estorna as estatísticas dos dois times
                         _timeController.BuscarPorCodigo(encontrado.CodigoMandante)
                             ?.EstornarResultado(encontrado.GolsMandante, encontrado.GolsVisitante);
                         _timeController.BuscarPorCodigo(encontrado.CodigoVisitante)
                             ?.EstornarResultado(encontrado.GolsVisitante, encontrado.GolsMandante);
+                        EstornarGolsJogadores(encontrado.GolsMandanteMatriculas);
+                        EstornarGolsJogadores(encontrado.GolsVisitanteMatriculas);
 
-                        // 2) Remove da lista
                         _partidas.Remove(encontrado);
+                        _jogadorController.Salvar();
 
                         _tela.MostrarMensagem("Partida excluída com sucesso!", _column + 2, _row + _height - 2);
                     }
@@ -242,9 +269,6 @@ namespace GolPro.Controller
             }
             else
             {
-                // ══════════════════════════════════════════════════════════
-                // PARTIDA NÃO ENCONTRADA — oferece Incluir
-                // ══════════════════════════════════════════════════════════
                 string opcao = _tela.MostrarMenu(new List<string>
                 {
                     "1 - Incluir",
@@ -253,18 +277,14 @@ namespace GolPro.Controller
 
                 if (opcao == "1")
                 {
-                    // ── INCLUIR ──────────────────────────────────────────
                     ShowForm();
 
-                    // 1) Gera o ID automaticamente e exibe na tela
                     _current.Id = _proximoId++;
                     Console.SetCursorPosition(_column + 20, _row + 3);
                     Console.Write(_current.Id);
 
-                    // 2) Lê os demais dados (mandante, visitante, data, gols)
                     EnterData("DT");
 
-                    // 3) Cria a nova partida e adiciona à lista
                     PartidaModel nova = new PartidaModel(
                         _current.Id,
                         _current.CodigoMandante,
@@ -273,19 +293,86 @@ namespace GolPro.Controller
                         _current.GolsMandante,
                         _current.GolsVisitante
                     );
+
+                    // Pergunta quem fez os gols
+                    RegistrarGolsJogadores(nova.GolsMandante, nova.CodigoMandante, nova.GolsMandanteMatriculas, "Mandante");
+                    RegistrarGolsJogadores(nova.GolsVisitante, nova.CodigoVisitante, nova.GolsVisitanteMatriculas, "Visitante");
+
                     _partidas.Add(nova);
 
-                    // 4) Registra as estatísticas nos dois times
-                    //    Mandante: fez GolsMandante, sofreu GolsVisitante
-                    //    Visitante: fez GolsVisitante, sofreu GolsMandante
                     _timeController.BuscarPorCodigo(nova.CodigoMandante)
                         ?.RegistrarPartida(nova.GolsMandante, nova.GolsVisitante);
                     _timeController.BuscarPorCodigo(nova.CodigoVisitante)
                         ?.RegistrarPartida(nova.GolsVisitante, nova.GolsMandante);
+                    
+                    _jogadorController.Salvar();
 
                     _tela.MostrarMensagem("Partida registrada com sucesso!", _column + 2, _row + _height - 2);
                 }
             }
+        }
+
+        // ── Relatórios ────────────────────────────────────────────────────────
+
+        public void Relatorio()
+        {
+            _tela.PrepararTela("Tabela de Classificação", _column, _row, _column + _width, _row + _height);
+            
+            // LINQ order by: Pontos > SaldoGols > GolsPro
+            var times = _timeController.Times;
+            times.Sort((t1, t2) => {
+                if (t1.Pontos != t2.Pontos) return t2.Pontos.CompareTo(t1.Pontos);
+                if (t1.SaldoGols != t2.SaldoGols) return t2.SaldoGols.CompareTo(t1.SaldoGols);
+                return t2.GolsPro.CompareTo(t1.GolsPro);
+            });
+
+            Console.SetCursorPosition(_column + 2, _row + 3);
+            Console.Write("Cód  Nome                 Pts  V   E   D   GP  GC  SG");
+
+            int linha = 5;
+            foreach(var t in times)
+            {
+                if (linha >= _row + _height - 2) break;
+                Console.SetCursorPosition(_column + 2, _row + linha);
+                Console.Write($"{t.Codigo,-4} {t.Nome,-20} {t.Pontos,3} {t.Vitorias,3} {t.Empates,3} {t.Derrotas,3} {t.GolsPro,3} {t.GolsContra,3} {t.SaldoGols,3}");
+                linha++;
+            }
+
+            Console.SetCursorPosition(_column + 2, _row + _height - 2);
+            Console.Write("Pressione qualquer tecla para voltar...");
+            Console.ReadKey();
+        }
+
+        public void ReportArtilheiros()
+        {
+            _tela.PrepararTela("Artilheiros do Campeonato", _column, _row, _column + _width, _row + _height);
+            
+            var jogadores = _jogadorController.Jogadores.FindAll(j => j.GolsMarcados > 0);
+            jogadores.Sort((j1, j2) => j2.GolsMarcados.CompareTo(j1.GolsMarcados));
+
+            Console.SetCursorPosition(_column + 2, _row + 3);
+            Console.Write("Matrícula  Nome                 Time  Gols");
+
+            int linha = 5;
+            if (jogadores.Count == 0)
+            {
+                Console.SetCursorPosition(_column + 2, _row + 5);
+                Console.Write("Nenhum gol registrado ainda.");
+            }
+            else
+            {
+                foreach(var j in jogadores)
+                {
+                    if (linha >= _row + _height - 2) break;
+                    Console.SetCursorPosition(_column + 2, _row + linha);
+                    Console.Write($"{j.Matricula,-10} {j.Nome,-20} {j.CodigoTime,-5} {j.GolsMarcados,4}");
+                    linha++;
+                }
+            }
+
+            Console.SetCursorPosition(_column + 2, _row + _height - 2);
+            Console.Write("Pressione qualquer tecla para voltar...");
+            Console.ReadKey();
         }
     }
 }

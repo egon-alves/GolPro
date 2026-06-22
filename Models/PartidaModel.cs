@@ -10,6 +10,8 @@ namespace GolPro.Models
         private DateTime _data;
         private int _golsMandante;
         private int _golsVisitante;
+        private List<string> _golsMandanteMatriculas;
+        private List<string> _golsVisitanteMatriculas;
 
         // Deixar os metodos publicos
 
@@ -53,6 +55,18 @@ namespace GolPro.Models
 
         }
 
+        public List<string> GolsMandanteMatriculas
+        {
+            get { return _golsMandanteMatriculas; }
+            set { _golsMandanteMatriculas = value; }
+        }
+
+        public List<string> GolsVisitanteMatriculas
+        {
+            get { return _golsVisitanteMatriculas; }
+            set { _golsVisitanteMatriculas = value; }
+        }
+
     // Criar os  construtores
         public PartidaModel()
         {
@@ -62,6 +76,8 @@ namespace GolPro.Models
             _data = DateTime.Now;
             _golsMandante = 0;
             _golsVisitante = 0;
+            _golsMandanteMatriculas = new List<string>();
+            _golsVisitanteMatriculas = new List<string>();
         }
 
         public PartidaModel(int id, string codigoMandante, string codigoVisitante, DateTime data, int golsMandante, int golsVisitante)
@@ -72,6 +88,8 @@ namespace GolPro.Models
             _data = data;
             _golsMandante = golsMandante;
             _golsVisitante = golsVisitante;
+            _golsMandanteMatriculas = new List<string>();
+            _golsVisitanteMatriculas = new List<string>();
         }
 
 
@@ -86,7 +104,9 @@ namespace GolPro.Models
 
         public string Serializar()
         {
-            return $"{_id};{_codigoMandante};{_codigoVisitante};{_data:yyyyMMdd};{_golsMandante};{_golsVisitante}";
+            string mandanteMats = string.Join(",", _golsMandanteMatriculas);
+            string visitanteMats = string.Join(",", _golsVisitanteMatriculas);
+            return $"{_id};{_codigoMandante};{_codigoVisitante};{_data:yyyyMMdd};{_golsMandante};{_golsVisitante};{mandanteMats};{visitanteMats}";
         }
             
         
