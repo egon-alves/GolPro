@@ -170,22 +170,42 @@ namespace GolPro.Controller
             {
                 while (true)
                 {
+                    // Limpa as duas últimas linhas
                     Console.SetCursorPosition(_column + 2, _row + _height - 3);
                     Console.Write(new string(' ', _width - 4));
-                    Console.SetCursorPosition(_column + 2, _row + _height - 3);
-                    Console.Write($"Matrícula de quem fez o gol {i + 1} do {tipoTime} ({codigoTime}): ");
-                    string mat = (Console.ReadLine() ?? "").ToUpper().Trim();
+                    Console.SetCursorPosition(_column + 2, _row + _height - 2);
+                    Console.Write(new string(' ', _width - 4));
 
-                    JogadorModel jog = _jogadorController.BuscarPorMatricula(mat);
-                    if (jog != null && jog.CodigoTime == codigoTime)
+                    Console.SetCursorPosition(_column + 2, _row + _height - 3);
+                    Console.Write($"Nome (ou matrícula) do autor do gol {i + 1} do {tipoTime} ({codigoTime}): ");
+                    string busca = (Console.ReadLine() ?? "").ToUpper().Trim();
+
+                    // Busca o jogador pelo nome (que contenha o texto) ou pela matrícula exata
+                    var encontrados = _jogadorController.Jogadores.FindAll(j => 
+                        j.CodigoTime == codigoTime && 
+                        (j.Nome.ToUpper().Contains(busca) || j.Matricula.ToUpper() == busca));
+
+                    if (encontrados.Count == 1)
                     {
-                        listaMatriculas.Add(mat);
-                        jog.AdicionarGols(1);
-                        break;
+                        JogadorModel jog = encontrados[0];
+                        Console.SetCursorPosition(_column + 2, _row + _height - 2);
+                        Console.Write($"Registrar gol para {jog.Nome} (Mat: {jog.Matricula})? (S/N): ");
+                        string resp = (Console.ReadLine() ?? "").ToUpper();
+                        
+                        if (resp == "S")
+                        {
+                            listaMatriculas.Add(jog.Matricula);
+                            jog.AdicionarGols(1);
+                            break; // sai do while e vai para o próximo gol
+                        }
+                    }
+                    else if (encontrados.Count > 1)
+                    {
+                        _tela.MostrarMensagem($"Encontrados {encontrados.Count} jogadores. Seja mais específico no nome!", _column + 2, _row + _height - 2);
                     }
                     else
                     {
-                        _tela.MostrarMensagem("Jogador não encontrado ou não é deste time!", _column + 2, _row + _height - 2);
+                        _tela.MostrarMensagem("Nenhum jogador encontrado com esse nome neste time!", _column + 2, _row + _height - 2);
                     }
                 }
             }

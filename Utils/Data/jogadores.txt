@@ -1,10 +1,10 @@
 101;Pedro;Atacante;FLA;9;0
 102;Arrascaeta;Meia;FLA;14;0
 103;Dudu;Atacante;PAL;7;0
-104;Raphael Veiga;Meia;PAL;23;3
+104;Raphael Veiga;Meia;PAL;23;6
 105;Calleri;Atacante;SAO;9;0
 106;Yuri Alberto;Atacante;COR;9;0
 107;Joao Paulo;Goleiro;SAN;1;0
-108;Diego Costa;Atacante;GRE;19;0
+108;Diego Costa;Atacante;GRE;19;2
 109;Alan Patrick;Meia;INT;10;0
 110;Hulk;Atacante;ATM;7;0
