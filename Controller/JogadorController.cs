@@ -5,6 +5,8 @@ using GolPro.utils;
 
 namespace GolPro.Controller
 {
+
+
     public class JogadorController
     {
         private int _column, _row, _width, _height;

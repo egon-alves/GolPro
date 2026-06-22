@@ -4,3 +4,4 @@
 03;Jogador03;Goleiro;GSS;0;0
 5;Jes;Gol;PAL;0;0
 2;2;;PAL;0;0
+05;Fernando;Meia;GRE;0;0
