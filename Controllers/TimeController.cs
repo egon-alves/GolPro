@@ -46,6 +46,13 @@ namespace GolPro.Controller
             return null;
         }
 
+        // ── Busca (público — usado pelo PartidaController) ───────────────────
+
+        public TimeModel BuscarPorCodigo(string codigo)
+        {
+            return FindByCode(codigo);
+        }
+
         // ── Tela ─────────────────────────────────────────────────────────────
 
         public void ShowForm()
