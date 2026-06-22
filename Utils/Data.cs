@@ -113,6 +113,38 @@ namespace GolPro.Utils
         return jogadores;
     }
 
+    public void SalvarPartidas(List<PartidaModel> partidas)
+    {
+        using(StreamWriter sw = new StreamWriter(this._arquivo))
+        {
+            foreach(PartidaModel partida in partidas)
+            {
+                sw.WriteLine(partida.Serializar());
+            }
+        }
+    }
+
+    public List<PartidaModel> CarregarPartidas()
+    {
+
+        List<PartidaModel> partidas = new List<PartidaModel>();
+
+        if (!File.Exists(this._arquivo))
+            return partidas;
+        
+        using(StreamReader sr = new StreamReader(this._arquivo))
+        {
+            string linha;
+            while ((linha = sr.ReadLine()) != null)
+            {
+                string[] partes = linha.Split(';');
+                if (partes.Length == 6)
+                {
+                    
+                }
+            }
+        }
+    }
     
     }
 }
