@@ -1,7 +1,7 @@
 101;Pedro;Atacante;FLA;9;0
 102;Arrascaeta;Meia;FLA;14;1
 103;Dudu;Atacante;PAL;7;0
-104;Raphael Veiga;Meia;PAL;23;9
+104;Raphael Veiga;Meia;PAL;23;10
 105;Calleri;Atacante;SAO;9;0
 106;Yuri Alberto;Atacante;COR;9;0
 107;Joao Paulo;Goleiro;SAN;1;0
@@ -11,3 +11,4 @@
 2;9329Geoasd;Zagueriso;PAL;0;0
 TESTE;e;eetet;PAL;0;0
 00122;Egon;Zagueiro;PAL;0;1
+123;Marolino;Goleiro;PAL;0;0
