@@ -30,21 +30,13 @@ namespace GolPro.Controller
             _jogadorController = jogCtrl;
             _data = new Data("Utils/Data/partidas.txt");
             _partidas = _data.CarregarPartidas();
+            
 
             if (_partidas.Count > 0)
                 _proximoId = _partidas[_partidas.Count - 1].Id + 1;
             else
                 _proximoId = 1;
 
-            // registro do pre carregamento
-
-            // PartidaModel pPre = new PartidaModel(
-            //     _proximoId++, "PAL", "FLA", 
-            //     new DateTime(2026, 3, 10), 3, 3
-            // );
-            // _partidas.Add(pPre);
-            // _timeController.BuscarPorCodigo("PAL")?.RegistrarPartida(3, 3);
-            // _timeController.BuscarPorCodigo("FLA")?.RegistrarPartida(3, 3);
         }
 
         // ── Acesso à lista ──────────────────────────────────────────────────

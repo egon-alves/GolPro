@@ -27,12 +27,13 @@ namespace GolPro.Controller
             this._width  = width;
             this._height = height;
             this._tela   = tela;
+            
             this._fields = new List<string> { "Código", "Nome", "Cidade" };
-           this._data = new Data("Utils/Data/times.txt");
-
+            this._data = new Data("Utils/Data/times.txt");
             // Registro pré-carregado
-
             this._times = this._data.CarregarTimes();
+            TimeModel tPre = new TimeModel("PAL", "Palmeiras", "São Paulo");
+            _times.Add(tPre);
         }
 
         // ── Busca (privado) ───────────────────────────────────────────────────

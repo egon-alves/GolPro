@@ -24,7 +24,7 @@ namespace GolPro.Controller
             set { _jogadores = value; }
         }
 
-        public JogadorController(int col, int row, int width, int height, Tela tela,List<TimeModel> times)
+        public JogadorController(int col, int row, int width, int height, Tela tela, List<TimeModel> times)
         {
             this._column = col;
             this._row = row;
@@ -35,8 +35,8 @@ namespace GolPro.Controller
             this._fields = new List<string> { "Matrícula", "Nome", "Posição", "Cód. Time" };
             this._data = new Data("Utils/Data/jogadores.txt");
 
-            // Carrega do arquivo; se não existir, retorna lista vazia
             this._jogadores = this._data.CarregarJogadores();
+
         }
 
         // ── Busca (privado) ───────────────────────────────────────────────────
