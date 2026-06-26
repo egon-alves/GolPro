@@ -95,12 +95,11 @@ namespace GolPro.Utils
             while ((linha = sr.ReadLine()) != null)
             {
                 string[] partes = linha.Split(';');
-                if (partes.Length == 6)  // 6 campos, não 9
+                if (partes.Length >= 5)  // matricula;nome;posicao;codigoTime;golsMarcados
                 {
-                    int.TryParse(partes[4], out int numeroCamisa);
-                    int.TryParse(partes[5], out int golsMarcados);
+                    int.TryParse(partes[4], out int golsMarcados);
 
-                    JogadorModel jogador = new JogadorModel(partes[0], partes[1], partes[2], partes[3], numeroCamisa)
+                    JogadorModel jogador = new JogadorModel(partes[0], partes[1], partes[2], partes[3])
                     {
                         GolsMarcados = golsMarcados
                     };
