@@ -96,7 +96,7 @@ Localização: PartidaController.ReportArtilheiros()
 
 # 7 - Diagrama de Classes 
 
-![alt text](/Documentação/diagramadeclasse.png)
+![Diagrama de Classes](/Documentação/images/diagramadeclasse.png)
 
 # 8 - Mocks da Tela (Plain Text)
 
@@ -146,7 +146,7 @@ Localização: PartidaController.ReportArtilheiros()
   ║                                                                            ║                                                                    
   ║                                                                            ║                                                                    
   ║ Navegação:                                                                 ║                                                                    
-  ║ ESC    Volta ao menu anterior                                              ║                                                                    
+  ║ ESC    Voltar ao menu anterior                                             ║                                                                    
   ║                                                                            ║                                                                    
   ║                                                                            ║                                                                    
   ║                                                                            ║                                                                    
@@ -172,7 +172,7 @@ Localização: PartidaController.ReportArtilheiros()
   ║                                                                            ║                                                                    
   ║                                                                            ║                                                                    
   ║ Navegação:                                                                 ║                                                                    
-  ║ ESC    Volta ao menu anterior                                              ║                                                                    
+  ║ ESC    Voltar ao menu anterior                                             ║                                                                    
   ║                                                                            ║                                                                    
   ║                                                                            ║                                                                    
   ║                                                                            ║                                                                    
@@ -200,7 +200,7 @@ Localização: PartidaController.ReportArtilheiros()
   ║                                                                            ║                                                                    
   ║                                                                            ║                                                                    
   ║ Navegação:                                                                 ║                                                                    
-  ║ ESC    Volta ao menu anterior                                              ║                                                                    
+  ║ ESC    Voltar ao menu anterior                                             ║                                                                    
   ║                                                                            ║                                                                    
   ║                                                                            ║                                                                    
   ║                                                                            ║                                                                    
@@ -229,8 +229,8 @@ Localização: PartidaController.ReportArtilheiros()
   ║                                                                            ║                                                                    
   ║                                                                            ║                                                                    
   ║                                                                            ║                                                                    
-  ║                                                                            ║                                                                    
-  ║ Pressione qualquer tecla para voltar...                                    ║                                                                    
+  ║ Navegação:                                                                 ║                                                                    
+  ║ ESC    Voltar ao menu anterior                                             ║                                                                    
   ║                                                                            ║                                                                    
   ╚════════════════════════════════════════════════════════════════ GolPro v1.0   
 ```
@@ -256,7 +256,7 @@ Localização: PartidaController.ReportArtilheiros()
   ║ 6001       Garro                COR      1                                 ║                                                                    
   ║                                                                            ║                                                                    
   ║                                                                            ║                                                                    
-  ║                                                                            ║                                                                    
-  ║ Pressione qualquer tecla para voltar...                                    ║                                                                    
+  ║ Navegação:                                                                 ║                                                                    
+  ║ ESC    Voltar ao menu anterior                                             ║                                                                     
   ║                                                                            ║                                                                    
   ╚════════════════════════════════════════════════════════════════ GolPro v1.0    
