@@ -11,7 +11,6 @@ namespace GolPro.Controller
     public class JogadorController
     {
         private int _column, _row, _width, _height;
-        private List<string> _fields;
         private List<JogadorModel> _jogadores;
         private List<TimeModel> _times;
         private Tela _tela;
@@ -32,7 +31,6 @@ namespace GolPro.Controller
             this._height = height;
             this._tela = tela;
             this._times = times;
-            this._fields = new List<string> { "Matrícula", "Nome", "Posição", "Cód. Time" };
             this._data = new Data("Utils/Data/jogadores.txt");
 
             this._jogadores = this._data.CarregarJogadores();

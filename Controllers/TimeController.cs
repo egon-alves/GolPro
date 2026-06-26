@@ -8,7 +8,7 @@ namespace GolPro.Controller
     public class TimeController
     {
         private int _column, _row, _width, _height;
-        private List<string> _fields;
+
         private List<TimeModel> _times;
         private Tela _tela;
         private Data _data;
@@ -27,8 +27,6 @@ namespace GolPro.Controller
             this._width  = width;
             this._height = height;
             this._tela   = tela;
-            
-            this._fields = new List<string> { "Código", "Nome", "Cidade" };
             this._data = new Data("Utils/Data/times.txt");
             // Registro pré-carregado
             this._times = this._data.CarregarTimes();
