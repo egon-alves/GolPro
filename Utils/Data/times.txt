@@ -4,3 +4,4 @@ SAO;São Paulo;SP;4;1;1;2;3;5
 CAM;Atlético Mineiro;MG;2;0;2;2;2;5
 BOT;Botafogo;RJ;1;0;1;1;1;3
 COR;Corinthians;SP;1;0;1;1;1;3
+LSA;Santa Cruz;Parnaiba;0;0;0;0;0;0

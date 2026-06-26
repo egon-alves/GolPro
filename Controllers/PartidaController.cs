@@ -91,7 +91,7 @@ namespace GolPro.Controller
 
          if(which == "PK"){
             string entradaId;
-            int id;
+            int id = 0;
             while(true) {
                 Console.SetCursorPosition(_column + 20, _row + 3);
                 Console.Write(new string(' ', _width - 22));

@@ -11,3 +11,4 @@
 5001;Junior Santos;Atacante;BOT;1
 6001;Garro;Meia;COR;1
 DDDD;EgonAlves;Goleiro;PAL;0
+22;Egonn;Zagueiro;PAL;0
