@@ -91,7 +91,7 @@ namespace GolPro.Controller
 
          if(which == "PK"){
             Console.SetCursorPosition(_column + 20, _row + 3);
-            string entradaId = Console.ReadLine() ?? "";
+            string entradaId = _tela.LerEntradaComEsc() ?? "";
             int id;
             if (string.IsNullOrWhiteSpace(entradaId)) {
                 id = _proximoId;
@@ -109,7 +109,7 @@ namespace GolPro.Controller
                     Console.SetCursorPosition(_column + 20, _row + 5);
                     Console.Write(new string(' ', _width - 22));
                     Console.SetCursorPosition(_column + 20, _row + 5);
-                    codMandante = (Console.ReadLine() ?? "").ToUpper().Trim();
+                    codMandante = (_tela.LerEntradaComEsc() ?? "").ToUpper().Trim();
 
                     if (string.IsNullOrEmpty(codMandante)) {
                         _tela.MostrarErroInLine("O time Mandante não pode ser vazio!", _column + 2, _row + _height - 2);
@@ -129,7 +129,7 @@ namespace GolPro.Controller
                     Console.SetCursorPosition(_column + 20, _row + 7);
                     Console.Write(new string(' ', _width - 22));
                     Console.SetCursorPosition(_column + 20, _row + 7);
-                    codVisitante = (Console.ReadLine() ?? "").ToUpper().Trim();
+                    codVisitante = (_tela.LerEntradaComEsc() ?? "").ToUpper().Trim();
 
                     if (string.IsNullOrEmpty(codVisitante)) {
                         _tela.MostrarErroInLine("O time Visitante não pode ser vazio!", _column + 2, _row + _height - 2);
@@ -152,7 +152,7 @@ namespace GolPro.Controller
                     Console.SetCursorPosition(_column + 20, _row + 9);
                     Console.Write(new string(' ', _width - 22));
                     Console.SetCursorPosition(_column + 20, _row + 9);
-                    string dataStr = Console.ReadLine() ?? "";
+                    string dataStr = _tela.LerEntradaComEsc() ?? "";
                     if (string.IsNullOrWhiteSpace(dataStr)) {
                         _current.Data = DateTime.Now.Date;
                         Console.SetCursorPosition(_column + 20, _row + 9);
@@ -173,7 +173,7 @@ namespace GolPro.Controller
                     Console.SetCursorPosition(_column + 20, _row + 11);
                     Console.Write(new string(' ', _width - 22));
                     Console.SetCursorPosition(_column + 20, _row + 11);
-                    string gmStr = Console.ReadLine() ?? "";
+                    string gmStr = _tela.LerEntradaComEsc() ?? "";
                     if (int.TryParse(gmStr, out int gm) && gm >= 0) {
                         _current.GolsMandante = gm;
                         _tela.MostrarErroInLine("", _column + 2, _row + _height - 2);
@@ -187,7 +187,7 @@ namespace GolPro.Controller
                     Console.SetCursorPosition(_column + 20, _row + 13);
                     Console.Write(new string(' ', _width - 22));
                     Console.SetCursorPosition(_column + 20, _row + 13);
-                    string gvStr = Console.ReadLine() ?? "";
+                    string gvStr = _tela.LerEntradaComEsc() ?? "";
                     if (int.TryParse(gvStr, out int gv) && gv >= 0) {
                         _current.GolsVisitante = gv;
                         _tela.MostrarErroInLine("", _column + 2, _row + _height - 2);
@@ -261,7 +261,7 @@ namespace GolPro.Controller
 
                     Console.SetCursorPosition(_column + 2, _row + _height - 3);
                     Console.Write($"Nome (ou matrícula) do autor do gol {i + 1} do {tipoTime} ({codigoTime}): ");
-                    string busca = (Console.ReadLine() ?? "").ToUpper().Trim();
+                    string busca = (_tela.LerEntradaComEsc() ?? "").ToUpper().Trim();
 
                     // Busca o jogador pelo nome (que contenha o texto) ou pela matrícula exata
                     var encontrados = _jogadorController.Jogadores.FindAll(j => 
@@ -273,7 +273,7 @@ namespace GolPro.Controller
                         JogadorModel jog = encontrados[0];
                         Console.SetCursorPosition(_column + 2, _row + _height - 2);
                         Console.Write($"Registrar gol para {jog.Nome} (Mat: {jog.Matricula})? (S/N): ");
-                        string resp = (Console.ReadLine() ?? "").ToUpper();
+                        string resp = (_tela.LerEntradaComEsc() ?? "").ToUpper();
                         
                         if (resp == "S")
                         {
@@ -354,7 +354,7 @@ namespace GolPro.Controller
                 {
                     Console.SetCursorPosition(_column + 2, _row + _height - 2);
                     Console.Write($"Confirma exclusão da partida {encontrado.Id}? (S/N): ");
-                    string resp = (Console.ReadLine() ?? "").ToUpper();
+                    string resp = (_tela.LerEntradaComEsc() ?? "").ToUpper();
 
                     if (resp == "S")
                     {
@@ -449,7 +449,15 @@ namespace GolPro.Controller
 
             Console.SetCursorPosition(_column + 2, _row + _height - 2);
             Console.Write("Pressione qualquer tecla para voltar...");
-            Console.ReadKey();
+            var tecla = Console.ReadKey(true);
+            if (tecla.Key == ConsoleKey.Escape)
+            {
+                Console.WriteLine("\nDeseja realmente voltar ao menu principal? (S/N)");
+                if (Console.ReadKey(true).Key == ConsoleKey.S)
+                {
+                    return;
+                }
+            }
         }
 
         public void ReportArtilheiros()
@@ -481,7 +489,15 @@ namespace GolPro.Controller
 
             Console.SetCursorPosition(_column + 2, _row + _height - 2);
             Console.Write("Pressione qualquer tecla para voltar...");
-            Console.ReadKey();
+            var tecla = Console.ReadKey(true);
+            if (tecla.Key == ConsoleKey.Escape)
+            {
+                Console.WriteLine("\nDeseja realmente voltar ao menu principal? (S/N)");
+                if (Console.ReadKey(true).Key == ConsoleKey.S)
+                {
+                    return;
+                }
+            }
         }
     }
 }

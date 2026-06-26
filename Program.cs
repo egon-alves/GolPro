@@ -33,44 +33,51 @@ namespace GolPro
 
             while (true)
             {
-                tela.PrepararTela("GolPRO - Sistema de registro", 2, 2, 79, 24);
-
-                int navCol = 4;
-                int navRow = 19;
-                Console.SetCursorPosition(navCol, navRow++); Console.Write("Navegação:");
-                Console.SetCursorPosition(navCol, navRow++); Console.Write("↑ ↓    Move a seleção");
-                Console.SetCursorPosition(navCol, navRow++); Console.Write("ENTER  Confirma a opção");
-                Console.SetCursorPosition(navCol, navRow++); Console.Write("ESC    Volta ao menu anterior");
-
-                menuEscolhido = tela.MostrarMenu(listMenu);
-
-                if (menuEscolhido == "0")
+                try
                 {
-                    Console.ResetColor();
-                    Console.Clear();
-                    Console.WriteLine("Até mais!");
-                    break;
-                }
-                else if (menuEscolhido == "1")
-                {
-                    timeController.CRUD();
-                }
-                else if (menuEscolhido == "2")
-                {
-                    jogadorController.CRUD();
-                }
-                else if (menuEscolhido == "3")
-                {
-                    partidaController.CRUD();
-                }
-                else if(menuEscolhido == "4") {
-                    partidaController.Relatorio();
-                }
+                    tela.PrepararTela("GolPRO - Sistema de registro", 2, 2, 79, 24);
 
-                else if(menuEscolhido == "5") {
-                    partidaController.ReportArtilheiros();
-                }
+                    int navCol = 4;
+                    int navRow = 19;
+                    Console.SetCursorPosition(navCol, navRow++); Console.Write("Navegação:");
+                    Console.SetCursorPosition(navCol, navRow++); Console.Write("↑ ↓    Move a seleção");
+                    Console.SetCursorPosition(navCol, navRow++); Console.Write("ENTER  Confirma a opção");
+                    Console.SetCursorPosition(navCol, navRow++); Console.Write("ESC    Volta ao menu anterior");
 
+                    menuEscolhido = tela.MostrarMenu(listMenu);
+
+                    if (menuEscolhido == "0")
+                    {
+                        Console.ResetColor();
+                        Console.Clear();
+                        Console.WriteLine("Até mais!");
+                        break;
+                    }
+                    else if (menuEscolhido == "1")
+                    {
+                        timeController.CRUD();
+                    }
+                    else if (menuEscolhido == "2")
+                    {
+                        jogadorController.CRUD();
+                    }
+                    else if (menuEscolhido == "3")
+                    {
+                        partidaController.CRUD();
+                    }
+                    else if(menuEscolhido == "4") {
+                        partidaController.Relatorio();
+                    }
+                    else if(menuEscolhido == "5") {
+                        partidaController.ReportArtilheiros();
+                    }
+                }
+                catch (VoltarMenuException)
+                {
+                    Console.SetCursorPosition(2, 23);
+                    Console.Write("Operação cancelada. Voltando ao menu...");
+                    System.Threading.Thread.Sleep(1000);
+                }
             }
         }
     }

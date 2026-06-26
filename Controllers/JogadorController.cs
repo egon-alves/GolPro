@@ -102,7 +102,7 @@ namespace GolPro.Controller
             if (which == "PK")
             {
                 Console.SetCursorPosition(_column + 19, _row + 3);
-                string matricula = (Console.ReadLine() ?? "").ToUpper().Trim();
+                string matricula = (_tela.LerEntradaComEsc() ?? "").ToUpper().Trim();
 
                 if (string.IsNullOrEmpty(matricula))
                 {
@@ -129,7 +129,7 @@ namespace GolPro.Controller
                     Console.SetCursorPosition(_column + 19, _row + 5);
                     Console.Write(new string(' ', _width - 21));
                     Console.SetCursorPosition(_column + 19, _row + 5);
-                    string nome = (Console.ReadLine() ?? "").Trim();
+                    string nome = (_tela.LerEntradaComEsc() ?? "").Trim();
                     if (string.IsNullOrEmpty(nome) || !nome.Replace(" ", "").All(char.IsLetter))
                     {
                         _tela.MostrarErroInLine("Nome inválido! Use apenas letras.", _column + 2, _row + _height - 2);
@@ -146,7 +146,7 @@ namespace GolPro.Controller
                     Console.SetCursorPosition(_column + 19, _row + 8);
                     Console.Write(new string(' ', _width - 21));
                     Console.SetCursorPosition(_column + 19, _row + 8);
-                    string posicao = (Console.ReadLine() ?? "").Trim();
+                    string posicao = (_tela.LerEntradaComEsc() ?? "").Trim();
 
                     var posEncontrada = posicoesValidas.FirstOrDefault(p => p.Equals(posicao, StringComparison.OrdinalIgnoreCase));
                     if (posEncontrada == null)
@@ -165,7 +165,7 @@ namespace GolPro.Controller
                     Console.SetCursorPosition(_column + 19, _row + 10);
                     Console.Write(new string(' ', _width - 21));
                     Console.SetCursorPosition(_column + 19, _row + 10);
-                    codigoTime = (Console.ReadLine() ?? "").ToUpper().Trim();
+                    codigoTime = (_tela.LerEntradaComEsc() ?? "").ToUpper().Trim();
 
                     if (!TimeExiste(codigoTime))
                         _tela.MostrarErroInLine($"Time '{codigoTime}' não encontrado. Tente novamente.", _column + 2, _row + _height - 2);
@@ -235,7 +235,7 @@ namespace GolPro.Controller
                 {
                     Console.SetCursorPosition(_column + 2, _row + _height - 2);
                     Console.Write($"Confirma exclusão de '{encontrado.Nome}'? (S/N): ");
-                    string resp = (Console.ReadLine() ?? "").ToUpper();
+                    string resp = (_tela.LerEntradaComEsc() ?? "").ToUpper();
                     if (resp == "S")
                     {
                         _jogadores.Remove(encontrado);

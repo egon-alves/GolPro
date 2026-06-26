@@ -99,7 +99,7 @@ namespace GolPro.Controller
                     Console.SetCursorPosition(_column + 12, _row + 3);
                     Console.Write(new string(' ', _width - 14));
                     Console.SetCursorPosition(_column + 12, _row + 3);
-                    codigo = (Console.ReadLine() ?? "").ToUpper().Trim();
+                    codigo = (_tela.LerEntradaComEsc() ?? "").ToUpper().Trim();
 
                     if (string.IsNullOrEmpty(codigo)) {
                         _tela.MostrarErroInLine("O código não pode ser vazio!", _column + 2, _row + _height - 2);
@@ -127,7 +127,7 @@ namespace GolPro.Controller
                     Console.SetCursorPosition(_column + 12, _row + 5);
                     Console.Write(new string(' ', _width - 14));
                     Console.SetCursorPosition(_column + 12, _row + 5);
-                    string nome = (Console.ReadLine() ?? "").Trim();
+                    string nome = (_tela.LerEntradaComEsc() ?? "").Trim();
                     if (string.IsNullOrEmpty(nome) || !nome.Replace(" ", "").All(char.IsLetter))
                     {
                         _tela.MostrarErroInLine("Nome inválido! Use apenas letras.", _column + 2, _row + _height - 2);
@@ -143,7 +143,7 @@ namespace GolPro.Controller
                     Console.SetCursorPosition(_column + 12, _row + 7);
                     Console.Write(new string(' ', _width - 14));
                     Console.SetCursorPosition(_column + 12, _row + 7);
-                    string cidade = (Console.ReadLine() ?? "").Trim();
+                    string cidade = (_tela.LerEntradaComEsc() ?? "").Trim();
                     if (string.IsNullOrEmpty(cidade) || !cidade.Replace(" ", "").All(char.IsLetter))
                     {
                         _tela.MostrarErroInLine("Cidade inválida! Use apenas letras.", _column + 2, _row + _height - 2);
@@ -216,7 +216,7 @@ namespace GolPro.Controller
                     // Excluir com confirmação
                     Console.SetCursorPosition(_column + 2, _row + _height - 2);
                     Console.Write($"Confirma exclusão de '{encontrado.Nome}'? (S/N): ");
-                    string resp = (Console.ReadLine() ?? "").ToUpper();
+                    string resp = (_tela.LerEntradaComEsc() ?? "").ToUpper();
                     if (resp == "S")
                     {
                         _times.Remove(encontrado);

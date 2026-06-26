@@ -282,5 +282,58 @@ namespace GolPro.Utils
             Console.CursorVisible = true;
             return opcoes[sel].Split(' ')[0];
         }
+
+        public string LerEntradaComEsc()
+        {
+            string entrada = "";
+            while (true)
+            {
+                var tecla = Console.ReadKey(intercept: true);
+
+                if (tecla.Key == ConsoleKey.Escape)
+                {
+                    int cCol = Console.CursorLeft;
+                    int cRow = Console.CursorTop;
+
+                    // Exibe menu de confirmação no lado direito (área segura que não sobrepõe os formulários)
+                    string opcao = this.MostrarMenu(45, 12, new List<string>
+                    {
+                        "S - Sim (Sair)",
+                        "N - Não"
+                    });
+
+                    if (opcao == "S")
+                    {
+                        throw new VoltarMenuException(); 
+                    }
+                    else
+                    {
+                        // Limpa a área do menu de confirmação
+                        LimparArea(45, 12, 70, 18);
+                        
+                        // Retorna o cursor para onde o usuário estava digitando
+                        Console.SetCursorPosition(cCol, cRow);
+                    }
+                }
+                else if (tecla.Key == ConsoleKey.Enter)
+                {
+                    Console.WriteLine();
+                    return entrada;
+                }
+                else if (tecla.Key == ConsoleKey.Backspace)
+                {
+                    if (entrada.Length > 0)
+                    {
+                        entrada = entrada.Substring(0, entrada.Length - 1);
+                        Console.Write("\b \b");
+                    }
+                }
+                else
+                {
+                    entrada += tecla.KeyChar;
+                    Console.Write(tecla.KeyChar);
+                }
+            }
+        }
     }
 }
