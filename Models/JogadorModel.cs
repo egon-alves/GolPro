@@ -11,8 +11,6 @@ namespace GolPro.Models
         private string _nome;
         private string _posicao;
         private string _codigoTime;
-
-        private int _numeroCamisa;
         private int _golsMarcados;
 
 
@@ -43,11 +41,6 @@ namespace GolPro.Models
             set { _codigoTime = value; }
         }
 
-        public int NumeroCamisa
-        {
-            get { return _numeroCamisa; }
-            set { _numeroCamisa = value; }
-        }
 
         public int GolsMarcados
         {
@@ -58,13 +51,12 @@ namespace GolPro.Models
   // Construtores
 
 
-        public JogadorModel(string matricula, string nome, string posicao, string codigoTime, int numeroCamisa)
+        public JogadorModel(string matricula, string nome, string posicao, string codigoTime)
         {
             _matricula = matricula;
             _nome = nome;
             _posicao = posicao;
             _codigoTime = codigoTime;
-            _numeroCamisa = numeroCamisa;
             _golsMarcados = 0;
         }
 
@@ -92,7 +84,7 @@ namespace GolPro.Models
 
         public string Serializar()
         {
-            return $"{_matricula};{_nome};{_posicao};{_codigoTime};{_numeroCamisa};{_golsMarcados}";
+            return $"{_matricula};{_nome};{_posicao};{_codigoTime};{_golsMarcados}";
         }
 
 
