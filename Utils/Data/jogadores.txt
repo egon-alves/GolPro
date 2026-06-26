@@ -1,14 +1,12 @@
-101;Pedro;Atacante;FLA;9;0
-102;Arrascaeta;Meia;FLA;14;1
-103;Dudu;Atacante;PAL;7;0
-104;Raphael Veiga;Meia;PAL;23;10
-105;Calleri;Atacante;SAO;9;0
-106;Yuri Alberto;Atacante;COR;9;0
-107;Joao Paulo;Goleiro;SAN;1;0
-108;Diego Costa;Atacante;GRE;19;2
-109;Alan Patrick;Meia;INT;10;0
-110;Hulk;Atacante;ATM;7;0
-2;9329Geoasd;Zagueriso;PAL;0;0
-TESTE;e;eetet;PAL;0;0
-00122;Egon;Zagueiro;PAL;0;1
-123;Marolino;Goleiro;PAL;0;0
+2001;Endrick;Atacante;PAL;5
+2002;Veiga;Meia;PAL;3
+2003;Estêvão;Atacante;PAL;2
+1001;Pedro;Atacante;FLA;3
+1002;Arrascaeta;Meia;FLA;1
+1003;Luiz Araújo;Atacante;FLA;1
+3001;Calleri;Atacante;SAO;2
+3002;Lucas Moura;Meia;SAO;1
+4001;Hulk;Atacante;CAM;1
+4002;Paulino;Atacante;CAM;1
+5001;Junior Santos;Atacante;BOT;1
+6001;Garro;Meia;COR;1
