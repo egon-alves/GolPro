@@ -89,6 +89,12 @@ namespace GolPro.Controller
 
             Console.SetCursorPosition(_column + 2, _row + 10);
             Console.Write("Codigo do Time : ");
+
+
+                int navCol = 4;
+                int navRow = 19;
+                Console.SetCursorPosition(navCol, navRow++); Console.Write("Navegação:");
+                Console.SetCursorPosition(navCol, navRow++); Console.Write("ESC    Volta ao menu anterior");
         }
 
         public void EnterData(string which)

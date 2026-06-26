@@ -34,6 +34,14 @@ namespace GolPro
             while (true)
             {
                 tela.PrepararTela("GolPRO - Sistema de registro", 2, 2, 79, 24);
+
+                int navCol = 4;
+                int navRow = 19;
+                Console.SetCursorPosition(navCol, navRow++); Console.Write("Navegação:");
+                Console.SetCursorPosition(navCol, navRow++); Console.Write("↑ ↓    Move a seleção");
+                Console.SetCursorPosition(navCol, navRow++); Console.Write("ENTER  Confirma a opção");
+                Console.SetCursorPosition(navCol, navRow++); Console.Write("ESC    Volta ao menu anterior");
+
                 menuEscolhido = tela.MostrarMenu(listMenu);
 
                 if (menuEscolhido == "0")

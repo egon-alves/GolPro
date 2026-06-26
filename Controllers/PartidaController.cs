@@ -80,6 +80,11 @@ namespace GolPro.Controller
 
             Console.SetCursorPosition(_column + 2, _row + 13);
             Console.Write("Gols Visitante  : ");
+
+            int navCol = 4;
+            int navRow = 19;
+            Console.SetCursorPosition(navCol, navRow++); Console.Write("Navegação:");
+            Console.SetCursorPosition(navCol, navRow++); Console.Write("ESC    Volta ao menu anterior");
         }
 
         public void EnterData(string which){
