@@ -233,10 +233,11 @@ namespace GolPro.Controller
 
         private void EstornarGolsJogadores(List<string> matriculas)
         {
-            foreach (string mat in matriculas)
+            foreach (string matricula in matriculas)
             {
-                JogadorModel jog = _jogadorController.BuscarPorMatricula(mat);
-                jog?.EstournarGols(1);
+                JogadorModel jogador = _jogadorController.BuscarPorMatricula(matricula);
+
+                jogador?.EstornarGols(1);
             }
         }
 

@@ -77,7 +77,7 @@ namespace GolPro.Models
         }
 
 
-        public void EstournarGols(int gols)
+        public void EstornarGols(int gols)
         {
             _golsMarcados -= gols;
         }
