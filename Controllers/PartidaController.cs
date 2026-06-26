@@ -449,15 +449,7 @@ namespace GolPro.Controller
 
             Console.SetCursorPosition(_column + 2, _row + _height - 2);
             Console.Write("Pressione qualquer tecla para voltar...");
-            var tecla = Console.ReadKey(true);
-            if (tecla.Key == ConsoleKey.Escape)
-            {
-                Console.WriteLine("\nDeseja realmente voltar ao menu principal? (S/N)");
-                if (Console.ReadKey(true).Key == ConsoleKey.S)
-                {
-                    return;
-                }
-            }
+            Console.ReadKey(true);
         }
 
         public void ReportArtilheiros()
@@ -489,15 +481,7 @@ namespace GolPro.Controller
 
             Console.SetCursorPosition(_column + 2, _row + _height - 2);
             Console.Write("Pressione qualquer tecla para voltar...");
-            var tecla = Console.ReadKey(true);
-            if (tecla.Key == ConsoleKey.Escape)
-            {
-                Console.WriteLine("\nDeseja realmente voltar ao menu principal? (S/N)");
-                if (Console.ReadKey(true).Key == ConsoleKey.S)
-                {
-                    return;
-                }
-            }
+            Console.ReadKey(true);
         }
     }
 }
