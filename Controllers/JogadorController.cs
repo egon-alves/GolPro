@@ -258,7 +258,6 @@ namespace GolPro.Controller
                         _current.Nome,
                         _current.Posicao,
                         _current.CodigoTime,
-                        0  // numeroCamisa padrão — pode ser lido depois
                     ));
 
                     _data.SalvarJogador(_jogadores);
