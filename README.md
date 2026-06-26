@@ -1,18 +1,26 @@
-## GolPro — Campeonato Esportivo
-# 1 - Visão Geral O GolPro é um sistema de gerenciamento de campeonatos esportivos,
-permitindo cadastrar times, jogadores e partidas, além de gerar automaticamente a
-tabela de classificação.
-# 2 - Funcionalidades Principais
-- Cadastro de times com código, nome e cidade.
-- Cadastro de jogadores com matrícula, nome, posição e vínculo ao time.
-- Registro de partidas com times participantes, data e placar final.
-- Atualização do contador de gols de cada jogador ao registrar uma partida.
-- Relatório da tabela de classificação ordenada por pontos e saldo de gols.
-- Relatório de artilheiros do campeonato.
+## GolPro — Sistema de Gerenciamento de Campeonatos de Futebol
 
-# Começa o trabalho de desenvolvimento do sistema, seguindo as regras de negócio e requisitos do enunciado
 
-# 3 - Regras de Negócio
+# 1 - Visão Geral
+O GolPro é um sistema de gerenciamento de campeonatos de futebol, permitindo cadastrar times, jogadores e partidas, além de gerar automaticamente a
+tabela de classificação e o ranking de artilheiros.
+
+# 2 - Objetivo
+Prover um sistema console em C# para registro e acompanhamento de campeonatos
+de futebol, automatizando o cálculo de pontuação, saldo de gols e artilharia.
+
+# 3 - Escopo
+O sistema abrange:
+- Cadastro, alteração e exclusão de times, jogadores e partidas.
+- Geração automática da tabela de classificação e relatório de artilheiros.
+
+O sistema não abrange:
+- Autenticação ou controle de acesso por usuário.
+- Interface gráfica, opera exclusivamente via console.
+- Integração com sistemas externos ou APIs.
+- Gerenciamento de múltiplos campeonatos simultâneos.
+
+# 4 - Regras de Negócio
 
 RN01 - **Unicidade de Time:** Não é possível cadastrar dois times com o mesmo código. 
 Garantido em: `TimeController.CRUD()` ao validar com `FindByCode()`.
@@ -27,9 +35,9 @@ RN04 - **Pontuação da Partida:** A vitória vale 3 pontos, o empate 1 ponto e 
 Garantido em: `TimeModel.RegistrarPartida()` e `TimeModel.EstornarResultado()`.
 
 RN05 - **Artilharia Mínima:** Apenas jogadores que marcaram pelo menos 1 gol (GolsMarcados > 0) podem aparecer no relatório de artilharia. 
-Garantido em: `PartidaController.ReportArtilheiros()`.# 4 - Requisitos Funcionais
+Garantido em: `PartidaController.ReportArtilheiros()`.
 
-# 4 - Requisitos Funcionais
+# 5 - Requisitos Funcionais
 
 RF01 - O sistema deve permitir o cadastro de times, incluindo código, nome e cidade. 
 Garantido em: `TimeController.CRUD()`
@@ -49,8 +57,6 @@ Garantido em: `PartidaController.Relatorio()`
 RF06 - O sistema deve gerar um relatório de artilheiros do campeonato.
 Garantido em: `PartidaController.ReportArtilheiros()`
 
-
-# 5 -  Requisitos Não Funcionais
 
 # 6 -  Caso e uso 
 UC01 - Cadastrar time
@@ -88,28 +94,32 @@ Pós-condição: Relatório de artilheiros exibido ou mensagem informativa
 Localização: PartidaController.ReportArtilheiros()
 
 
-# 7 -  Classe 
+# 7 - Diagrama de Classes 
 
-![alt text](/Documentação/image.png)
+![alt text](/Documentação/diagramadeclasse.png)
 
 # 8 - Mocks da Tela (Plain Text)
 
 **Menu Principal**
 
-![alt text](/Documentação/image-1.png)
+![alt text](/Documentação/menuInicial.png)
 
 **1 - Cadastros de Times**
 
-![alt text](/Documentação/image-2.png)
+![alt text](/Documentação/cadastroDeTimes.png)
 
 **2 - Cadastros de Jogadores** 
 
-![alt text](/Documentação/image-5.png)
+![alt text](/Documentação/cadastroDeJogadores.png)
 
 **3 - Registro de Partidas** 
 
-![alt text](/Documentação/image-4.png)
+![alt text](/Documentação/cadastroDePartidas.png)
 
 **4 - Tabela de Classificação** 
 
+![alt text](/Documentação/tabelaClassificacao.png)
+
 **5 - Estatísticas de Jogadores** 
+
+![alt text](/Documentação/estatisticasDeJogadores.png)
