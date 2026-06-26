@@ -101,25 +101,158 @@ Localização: PartidaController.ReportArtilheiros()
 # 8 - Mocks da Tela (Plain Text)
 
 **Menu Principal**
-
-![alt text](/Documentação/menuInicial.png)
+                                                      
+  ╔════════════════════════════════════════════════════════════════════════════╗                                                                    
+  ║                       GOLPRO - SISTEMA DE REGISTRO                         ║                                                                    
+  ╠════════════════════════════════════════════════════════════════════════════╣                                                                    
+  ║                                                                            ║                                                                    
+  ║                                                                            ║                                                                    
+  ║                                                                            ║                                                                    
+  ║                                                                            ║                                                                    
+  ║                    ┌────────────────────↑↓ 0-9 Enter─┐                     ║                                                                    
+  ║                    │ ► 1 - Cadastros de Times        │                     ║                                                                    
+  ║                    │   2 - Cadastros de Jogadores    │                     ║                                                                    
+  ║                    │   3 - Registro de Partidas      │                     ║                                                                    
+  ║                    │   4 - Tabela de Classificação   │                     ║                                                                    
+  ║                    │   5 - Estatísticas de Jogadores │                     ║                                                                    
+  ║                    │   0 - Sair                      │                     ║                                                                    
+  ║                    │                                 │                     ║                                                                    
+  ║                    └─────────────────────────────────┘                     ║                                                                    
+  ║                                                                            ║                                                                    
+  ║ Navegação:                                                                 ║                                                                    
+  ║ ↑ ↓    Move a seleção                                                      ║                                                                    
+  ║ ENTER  Confirma a opção                                                    ║                                                                    
+  ║ ESC    Volta ao menu anterior                                              ║                                                                    
+  ║                                                                            ║                                                                    
+  ╚════════════════════════════════════════════════════════════════ GolPro v1.0     
 
 **1 - Cadastros de Times**
 
-![alt text](/Documentação/cadastroDeTimes.png)
+  ╔════════════════════════════════════════════════════════════════════════════╗                                                                    
+  ║                             CADASTRO DE TIMES                              ║                                                                    
+  ╠════════════════════════════════════════════════════════════════════════════╣                                                                    
+  ║ Código  :                                                                  ║                                                                    
+  ║                                                                            ║                                                                    
+  ║ Nome    :                                                                  ║                                                                    
+  ║                                                                            ║                                                                    
+  ║ Cidade  :                                                                  ║                                                                    
+  ║                                                                            ║                                                                    
+  ║                                                                            ║                                                                    
+  ║                                          ┌─────↑↓ 0-9 Enter─┐              ║                                                                    
+  ║                                          │ ► S - Sim (Sair) │              ║                                                                    
+  ║                                          │   N - Não        │              ║                                                                    
+  ║                                          │                  │              ║                                                                    
+  ║                                          └──────────────────┘              ║                                                                    
+  ║                                                                            ║                                                                    
+  ║                                                                            ║                                                                    
+  ║ Navegação:                                                                 ║                                                                    
+  ║ ESC    Volta ao menu anterior                                              ║                                                                    
+  ║                                                                            ║                                                                    
+  ║                                                                            ║                                                                    
+  ║                                                                            ║                                                                    
+  ╚════════════════════════════════════════════════════════════════ GolPro v1.0                                                                     
 
 **2 - Cadastros de Jogadores** 
 
-![alt text](/Documentação/cadastroDeJogadores.png)
+  ╔════════════════════════════════════════════════════════════════════════════╗                                                                    
+  ║                           CADASTRO DE JOGADORES                            ║                                                                    
+  ╠════════════════════════════════════════════════════════════════════════════╣                                                                    
+  ║ Matrícula      :                                                           ║                                                                    
+  ║                                                                            ║                                                                    
+  ║ Nome           :                                                           ║                                                                    
+  ║                                                                            ║                                                                    
+  ║   Posicoes: Goleiro / Zagueiro / Lateral / Meia / Atacante                 ║                                                                    
+  ║ Posicao        :                                                           ║                                                                    
+  ║                                                                            ║                                                                    
+  ║ Codigo do Time :                                                           ║                                                                    
+  ║                                                                            ║                                                                    
+  ║                                                                            ║                                                                    
+  ║                                                                            ║                                                                    
+  ║                                                                            ║                                                                    
+  ║                                                                            ║                                                                    
+  ║                                                                            ║                                                                    
+  ║ Navegação:                                                                 ║                                                                    
+  ║ ESC    Volta ao menu anterior                                              ║                                                                    
+  ║                                                                            ║                                                                    
+  ║                                                                            ║                                                                    
+  ║                                                                            ║                                                                    
+  ╚════════════════════════════════════════════════════════════════ GolPro v1.0                                                                     
 
 **3 - Registro de Partidas** 
+                                                          
+  ╔════════════════════════════════════════════════════════════════════════════╗                                                                    
+  ║                           REGISTRO DE PARTIDAS                             ║                                                                    
+  ╠════════════════════════════════════════════════════════════════════════════╣                                                                    
+  ║ ID              :                                                          ║                                                                    
+  ║                                                                            ║                                                                    
+  ║ Mandante        :                                                          ║                                                                    
+  ║                                                                            ║                                                                    
+  ║ Visitante       :                                                          ║                                                                    
+  ║                                                                            ║                                                                    
+  ║ Data (dd/MM/yyyy):                                                         ║                                                                    
+  ║                                                                            ║                                                                    
+  ║ Gols Mandante   :                                                          ║                                                                    
+  ║                                                                            ║                                                                    
+  ║ Gols Visitante  :                                                          ║                                                                    
+  ║                                                                            ║                                                                    
+  ║                                                                            ║                                                                    
+  ║                                                                            ║                                                                    
+  ║ Navegação:                                                                 ║                                                                    
+  ║ ESC    Volta ao menu anterior                                              ║                                                                    
+  ║                                                                            ║                                                                    
+  ║                                                                            ║                                                                    
+  ║                                                                            ║                                                                    
+  ╚════════════════════════════════════════════════════════════════ GolPro v1.0                                                                     
+                                                                                                                                                    
+                                                                                 
 
-![alt text](/Documentação/cadastroDePartidas.png)
-
-**4 - Tabela de Classificação** 
-
-![alt text](/Documentação/tabelaClassificacao.png)
+**4 - Tabela de Classificação**                                                                                                                                       
+  ╔════════════════════════════════════════════════════════════════════════════╗                                                                    
+  ║                          TABELA DE CLASSIFICAÇÃO                           ║                                                                    
+  ╠════════════════════════════════════════════════════════════════════════════╣                                                                    
+  ║ Cód  Nome                 Pts  V   E   D   GP  GC  SG                      ║                                                                    
+  ║                                                                            ║                                                                    
+  ║ PAL  Palmeiras             12   4   0   0  10   1   9                      ║                                                                    
+  ║ FLA  Flamengo               7   2   1   1   5   4   1                      ║                                                                    
+  ║ SAO  São Paulo              4   1   1   2   3   5  -2                      ║                                                                    
+  ║ CAM  Atlético Mineiro       2   0   2   2   2   5  -3                      ║                                                                    
+  ║ BOT  Botafogo               1   0   1   1   1   3  -2                      ║                                                                    
+  ║ COR  Corinthians            1   0   1   1   1   3  -2                      ║                                                                    
+  ║                                                                            ║                                                                    
+  ║                                                                            ║                                                                    
+  ║                                                                            ║                                                                    
+  ║                                                                            ║                                                                    
+  ║                                                                            ║                                                                    
+  ║                                                                            ║                                                                    
+  ║                                                                            ║                                                                    
+  ║                                                                            ║                                                                    
+  ║                                                                            ║                                                                    
+  ║ Pressione qualquer tecla para voltar...                                    ║                                                                    
+  ║                                                                            ║                                                                    
+  ╚════════════════════════════════════════════════════════════════ GolPro v1.0   
 
 **5 - Estatísticas de Jogadores** 
-
-![alt text](/Documentação/estatisticasDeJogadores.png)
+                                                                                                                                              
+  ╔════════════════════════════════════════════════════════════════════════════╗                                                                    
+  ║                         ARTILHEIROS DO CAMPEONATO                          ║                                                                    
+  ╠════════════════════════════════════════════════════════════════════════════╣                                                                    
+  ║ Matrícula  Nome                 Time  Gols                                 ║                                                                    
+  ║                                                                            ║                                                                    
+  ║ 2001       Endrick              PAL      5                                 ║                                                                    
+  ║ 2002       Veiga                PAL      3                                 ║                                                                    
+  ║ 1001       Pedro                FLA      3                                 ║                                                                    
+  ║ 2003       Estêvão              PAL      2                                 ║                                                                    
+  ║ 3001       Calleri              SAO      2                                 ║                                                                    
+  ║ 1002       Arrascaeta           FLA      1                                 ║                                                                    
+  ║ 1003       Luiz Araújo          FLA      1                                 ║                                                                    
+  ║ 3002       Lucas Moura          SAO      1                                 ║                                                                    
+  ║ 4001       Hulk                 CAM      1                                 ║                                                                    
+  ║ 4002       Paulino              CAM      1                                 ║                                                                    
+  ║ 5001       Junior Santos        BOT      1                                 ║                                                                    
+  ║ 6001       Garro                COR      1                                 ║                                                                    
+  ║                                                                            ║                                                                    
+  ║                                                                            ║                                                                    
+  ║                                                                            ║                                                                    
+  ║ Pressione qualquer tecla para voltar...                                    ║                                                                    
+  ║                                                                            ║                                                                    
+  ╚════════════════════════════════════════════════════════════════ GolPro v1.0    
