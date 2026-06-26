@@ -90,35 +90,26 @@ Localização: PartidaController.ReportArtilheiros()
 
 # 7 -  Classe 
 
-![alt text](image.png)
+![alt text](/Documentação/image.png)
 
 # 8 - Mocks da Tela (Plain Text)
 
 **Menu Principal**
-```text
-=============================================================================
-| GolPRO - Sistema de registro                                              |
-|                                                                           |
-|  1 - Cadastros de Times                                                   |
-|  2 - Cadastros de Jogadores                                               |
-|  3 - Registro de Partidas                                                 |
-|  4 - Tabela de Classificação                                              |
-|  5 - Estatísticas de Jogadores                                            |
-|  0 - Sair                                                                 |
-|                                                                           |
-| Selecione a opção: _                                                      |
-=============================================================================
-```
 
-**Tabela de Classificação**
-```text
-=============================================================================
-| Tabela de Classificação                                                   |
-|                                                                           |
-| Cód  Nome                 Pts  V   E   D   GP  GC  SG                     |
-| PAL  Palmeiras              3  1   0   0    3   1   2                     |
-| FLA  Flamengo               0  0   0   1    1   3  -2                     |
-|                                                                           |
-| Pressione qualquer tecla para voltar...                                   |
-=============================================================================
-```
+![alt text](/Documentação/image-1.png)
+
+**1 - Cadastros de Times**
+
+![alt text](/Documentação/image-2.png)
+
+**2 - Cadastros de Jogadores** 
+
+![alt text](/Documentação/image-5.png)
+
+**3 - Registro de Partidas** 
+
+![alt text](/Documentação/image-4.png)
+
+**4 - Tabela de Classificação** 
+
+**5 - Estatísticas de Jogadores** 
