@@ -257,7 +257,7 @@ namespace GolPro.Controller
                         _current.Matricula,
                         _current.Nome,
                         _current.Posicao,
-                        _current.CodigoTime,
+                        _current.CodigoTime
                     ));
 
                     _data.SalvarJogador(_jogadores);
