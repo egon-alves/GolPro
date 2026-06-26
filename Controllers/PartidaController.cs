@@ -423,9 +423,36 @@ namespace GolPro.Controller
 
         // ── Relatórios ────────────────────────────────────────────────────────
 
+        private void ShowReportForm(string titulo)
+        {
+            _tela.PrepararTela(titulo, _column, _row, _column + _width, _row + _height);
+
+            Console.SetCursorPosition(_column + 2, _row + 3);
+            if (titulo == "Tabela de Classificação")
+            {
+                Console.Write("Cód  Nome                 Pts  V   E   D   GP  GC  SG");
+            }
+            else if (titulo == "Artilheiros do Campeonato")
+            {
+                Console.Write("Matrícula  Nome                 Time  Gols");
+            }
+        }
+
+        private void ShowReportRow(int row, TimeModel t)
+        {
+            Console.SetCursorPosition(_column + 2, _row + row);
+            Console.Write($"{t.Codigo,-4} {t.Nome,-20} {t.Pontos,3} {t.Vitorias,3} {t.Empates,3} {t.Derrotas,3} {t.GolsPro,3} {t.GolsContra,3} {t.SaldoGols,3}");
+        }
+
+        private void ShowReportRow(int row, JogadorModel j)
+        {
+            Console.SetCursorPosition(_column + 2, _row + row);
+            Console.Write($"{j.Matricula,-10} {j.Nome,-20} {j.CodigoTime,-5} {j.GolsMarcados,4}");
+        }
+
         public void Relatorio()
         {
-            _tela.PrepararTela("Tabela de Classificação", _column, _row, _column + _width, _row + _height);
+            ShowReportForm("Tabela de Classificação");
 
             // LINQ order by: Pontos > SaldoGols > GolsPro
             var times = _timeController.Times;
@@ -435,15 +462,11 @@ namespace GolPro.Controller
                 return t2.GolsPro.CompareTo(t1.GolsPro);
             });
 
-            Console.SetCursorPosition(_column + 2, _row + 3);
-            Console.Write("Cód  Nome                 Pts  V   E   D   GP  GC  SG");
-
             int linha = 5;
             foreach(var t in times)
             {
                 if (linha >= _row + _height - 2) break;
-                Console.SetCursorPosition(_column + 2, _row + linha);
-                Console.Write($"{t.Codigo,-4} {t.Nome,-20} {t.Pontos,3} {t.Vitorias,3} {t.Empates,3} {t.Derrotas,3} {t.GolsPro,3} {t.GolsContra,3} {t.SaldoGols,3}");
+                ShowReportRow(linha, t);
                 linha++;
             }
 
@@ -455,13 +478,10 @@ namespace GolPro.Controller
 
         public void ReportArtilheiros()
         {
-            _tela.PrepararTela("Artilheiros do Campeonato", _column, _row, _column + _width, _row + _height);
+            ShowReportForm("Artilheiros do Campeonato");
             
             var jogadores = _jogadorController.Jogadores.FindAll(j => j.GolsMarcados > 0);
             jogadores.Sort((j1, j2) => j2.GolsMarcados.CompareTo(j1.GolsMarcados));
-
-            Console.SetCursorPosition(_column + 2, _row + 3);
-            Console.Write("Matrícula  Nome                 Time  Gols");
 
             int linha = 5;
             if (jogadores.Count == 0)
@@ -473,8 +493,7 @@ namespace GolPro.Controller
                 foreach(var j in jogadores)
                 {
                     if (linha >= _row + _height - 2) break;
-                    Console.SetCursorPosition(_column + 2, _row + linha);
-                    Console.Write($"{j.Matricula,-10} {j.Nome,-20} {j.CodigoTime,-5} {j.GolsMarcados,4}");
+                    ShowReportRow(linha, j);
                     linha++;
                 }
             }
