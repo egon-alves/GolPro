@@ -426,7 +426,7 @@ namespace GolPro.Controller
         public void Relatorio()
         {
             _tela.PrepararTela("Tabela de Classificação", _column, _row, _column + _width, _row + _height);
-            
+
             // LINQ order by: Pontos > SaldoGols > GolsPro
             var times = _timeController.Times;
             times.Sort((t1, t2) => {
@@ -447,9 +447,10 @@ namespace GolPro.Controller
                 linha++;
             }
 
-            Console.SetCursorPosition(_column + 2, _row + _height - 2);
-            Console.Write("Pressione qualquer tecla para voltar...");
-            Console.ReadKey(true);
+            if (times.Count == 0)
+                _tela.Centralizar(_column, _column + _width, _row + 5, "Nenhum time cadastrado.");
+
+            _tela.Perguntar("Tecle Enter para voltar: ", _row + _height - 2, _column + 2, _column + _width - 2);
         }
 
         public void ReportArtilheiros()
@@ -465,8 +466,7 @@ namespace GolPro.Controller
             int linha = 5;
             if (jogadores.Count == 0)
             {
-                Console.SetCursorPosition(_column + 2, _row + 5);
-                Console.Write("Nenhum gol registrado ainda.");
+                _tela.Centralizar(_column, _column + _width, _row + 5, "Nenhum gol registrado ainda.");
             }
             else
             {
@@ -479,9 +479,7 @@ namespace GolPro.Controller
                 }
             }
 
-            Console.SetCursorPosition(_column + 2, _row + _height - 2);
-            Console.Write("Pressione qualquer tecla para voltar...");
-            Console.ReadKey(true);
+            _tela.Perguntar("Tecle Enter para voltar: ", _row + _height - 2, _column + 2, _column + _width - 2);
         }
     }
 }
