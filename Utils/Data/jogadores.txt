@@ -10,3 +10,4 @@
 4002;Paulino;Atacante;CAM;1
 5001;Junior Santos;Atacante;BOT;1
 6001;Garro;Meia;COR;1
+DDDD;EgonAlves;Goleiro;PAL;0

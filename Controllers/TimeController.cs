@@ -109,7 +109,7 @@ namespace GolPro.Controller
                         _tela.MostrarErroInLine("O código deve ter no máximo 3 letras!", _column + 2, _row + _height - 2);
                         continue;
                     }
-                    if (!codigo.All(char.IsLetter)) {
+                    if (!codigo.All(c => c >= 'A' && c <= 'Z')) {
                         _tela.MostrarErroInLine("O código deve conter apenas letras!", _column + 2, _row + _height - 2);
                         continue;
                     }

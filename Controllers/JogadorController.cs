@@ -101,8 +101,22 @@ namespace GolPro.Controller
         {
             if (which == "PK")
             {
-                Console.SetCursorPosition(_column + 19, _row + 3);
-                string matricula = (_tela.LerEntradaComEsc() ?? "").ToUpper().Trim();
+                string matricula;
+                while (true)
+                {
+                    Console.SetCursorPosition(_column + 19, _row + 3);
+                    Console.Write(new string(' ', _width - 21));
+                    Console.SetCursorPosition(_column + 19, _row + 3);
+                    matricula = (_tela.LerEntradaComEsc() ?? "").ToUpper().Trim();
+
+                    if (!string.IsNullOrEmpty(matricula) && !matricula.All(char.IsDigit))
+                    {
+                        _tela.MostrarErroInLine("A matrícula deve ser numérica!", _column + 2, _row + _height - 2);
+                        continue;
+                    }
+                    _tela.MostrarErroInLine("", _column + 2, _row + _height - 2);
+                    break;
+                }
 
                 if (string.IsNullOrEmpty(matricula))
                 {

@@ -90,15 +90,26 @@ namespace GolPro.Controller
         public void EnterData(string which){
 
          if(which == "PK"){
-            Console.SetCursorPosition(_column + 20, _row + 3);
-            string entradaId = _tela.LerEntradaComEsc() ?? "";
+            string entradaId;
             int id;
+            while(true) {
+                Console.SetCursorPosition(_column + 20, _row + 3);
+                Console.Write(new string(' ', _width - 22));
+                Console.SetCursorPosition(_column + 20, _row + 3);
+                entradaId = (_tela.LerEntradaComEsc() ?? "").Trim();
+
+                if (!string.IsNullOrWhiteSpace(entradaId) && !int.TryParse(entradaId, out id)) {
+                    _tela.MostrarErroInLine("O ID deve ser numérico!", _column + 2, _row + _height - 2);
+                    continue;
+                }
+                _tela.MostrarErroInLine("", _column + 2, _row + _height - 2);
+                break;
+            }
+
             if (string.IsNullOrWhiteSpace(entradaId)) {
                 id = _proximoId;
                 Console.SetCursorPosition(_column + 20, _row + 3);
                 Console.Write(id);
-            } else {
-                int.TryParse(entradaId, out id);
             }
             _current = new PartidaModel();
             _current.Id = id;
