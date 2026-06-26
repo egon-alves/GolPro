@@ -30,8 +30,18 @@ namespace GolPro.Controller
             this._data = new Data("Utils/Data/times.txt");
             // Registro pré-carregado
             this._times = this._data.CarregarTimes();
+            
+            if (this._times == null)
+            {
+                this._times = new List<TimeModel>();
+            }
+            
             TimeModel tPre = new TimeModel("PAL", "Palmeiras", "São Paulo");
-            _times.Add(tPre);
+            if (FindByCode(tPre.Codigo) == null)
+            {
+                this._times.Add(tPre);
+            }
+
         }
 
         // ── Busca (privado) ───────────────────────────────────────────────────
