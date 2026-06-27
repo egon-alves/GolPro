@@ -14,16 +14,16 @@ namespace GolPro.Utils
         private ConsoleColor _corTexto;
 
         // paleta fixa do tema
-        private static readonly ConsoleColor Fundo      = ConsoleColor.Black;
-        private static readonly ConsoleColor Texto      = ConsoleColor.White;
-        private static readonly ConsoleColor Borda      = ConsoleColor.White;
-        private static readonly ConsoleColor Titulo     = ConsoleColor.White;
-        private static readonly ConsoleColor Destaque   = ConsoleColor.White;
-        private static readonly ConsoleColor MenuBorda  = ConsoleColor.White;
-        private static readonly ConsoleColor SelFundo   = ConsoleColor.White;
-        private static readonly ConsoleColor SelTexto   = ConsoleColor.Black;
-        private static readonly ConsoleColor CorSucesso = ConsoleColor.White;
-        private static readonly ConsoleColor CorErro    = ConsoleColor.White;
+        private static readonly ConsoleColor _fundo      = ConsoleColor.Black;
+        private static readonly ConsoleColor _texto      = ConsoleColor.White;
+        private static readonly ConsoleColor _borda      = ConsoleColor.White;
+        private static readonly ConsoleColor _titulo     = ConsoleColor.White;
+        private static readonly ConsoleColor _destaque   = ConsoleColor.White;
+        private static readonly ConsoleColor _menuBorda  = ConsoleColor.White;
+        private static readonly ConsoleColor _selFundo   = ConsoleColor.White;
+        private static readonly ConsoleColor _selTexto   = ConsoleColor.Black;
+        private static readonly ConsoleColor _corSucesso = ConsoleColor.White;
+        private static readonly ConsoleColor _corErro    = ConsoleColor.White;
 
         // limites salvos para centralizar o menu
         private int _ci, _li, _cf, _lf;
@@ -38,7 +38,11 @@ namespace GolPro.Utils
             this._corTexto = ct;
         }
 
-        public Tela() { }
+        public Tela() 
+        { 
+            this._corFundo = _fundo;
+            this._corTexto = _texto;
+        }
 
         //
         // ── Métodos da interface Biblioteca (obrigatórios) ────────────────────
@@ -47,8 +51,8 @@ namespace GolPro.Utils
         // PrepararTela: limpa, monta moldura, centraliza o título
         public void PrepararTela(string titulo, int ci, int li, int cf, int lf)
         {
-            Console.BackgroundColor = Fundo;
-            Console.ForegroundColor = Texto;
+            Console.BackgroundColor = _corFundo;
+            Console.ForegroundColor = _corTexto;
             Console.CursorVisible   = true;
 
             _ci = ci; _li = li; _cf = cf; _lf = lf;
@@ -58,21 +62,21 @@ namespace GolPro.Utils
             MontarMoldura(ci, li, cf, lf);
 
             // separador abaixo do título
-            Console.ForegroundColor = Borda;
+            Console.ForegroundColor = _borda;
             Console.SetCursorPosition(ci, li + 2); Console.Write("╠");
             for (int c = ci + 1; c < cf; c++) { Console.SetCursorPosition(c, li + 2); Console.Write("═"); }
             Console.SetCursorPosition(cf, li + 2); Console.Write("╣");
 
             // título sobre o separador
-            Console.ForegroundColor = Titulo;
+            Console.ForegroundColor = _titulo;
             Centralizar(ci, cf, li + 1, titulo.ToUpper());
 
             // versão no rodapé
-            Console.ForegroundColor = Borda;
+            Console.ForegroundColor = _borda;
             Console.SetCursorPosition(cf - 12, lf);
             Console.Write(" GolPro v1.0 ");
 
-            Console.ForegroundColor = Texto;
+            Console.ForegroundColor = _corTexto;
         }
 
         // Centralizar: escreve texto centralizado numa linha
@@ -95,7 +99,7 @@ namespace GolPro.Utils
         // LimparArea: apaga uma área retangular da tela
         public void LimparArea(int ci, int li, int cf, int lf)
         {
-            Console.BackgroundColor = Fundo;
+            Console.BackgroundColor = _corFundo;
             for (int y = li; y <= lf; y++)
             {
                 Console.SetCursorPosition(ci, y);
@@ -107,7 +111,7 @@ namespace GolPro.Utils
         public void MontarMoldura(int ci, int li, int cf, int lf)
         {
             LimparArea(ci, li, cf, lf);
-            Console.ForegroundColor = Borda;
+            Console.ForegroundColor = _borda;
 
             for (int c = ci + 1; c < cf; c++)
             {
@@ -125,7 +129,7 @@ namespace GolPro.Utils
             Console.SetCursorPosition(ci, lf); Console.Write('╚');
             Console.SetCursorPosition(cf, lf); Console.Write('╝');
 
-            Console.ForegroundColor = Texto;
+            Console.ForegroundColor = _corTexto;
         }
 
         // MostrarMenu (assinatura Biblioteca — com posição explícita)
@@ -161,10 +165,10 @@ namespace GolPro.Utils
         {
             Console.SetCursorPosition(col, row);
             Console.Write(new string(' ', 65));
-            Console.ForegroundColor = CorSucesso;
+            Console.ForegroundColor = _corSucesso;
             Console.SetCursorPosition(col, row);
             Console.Write($"  ✔  {msg}  [ Enter ]");
-            Console.ForegroundColor = Texto;
+            Console.ForegroundColor = _corTexto;
             Console.ReadLine();
         }
 
@@ -173,10 +177,10 @@ namespace GolPro.Utils
         {
             Console.SetCursorPosition(col, row);
             Console.Write(new string(' ', 65));
-            Console.ForegroundColor = CorErro;
+            Console.ForegroundColor = _corErro;
             Console.SetCursorPosition(col, row);
             Console.Write($"  ✖  {msg}  [ Enter ]");
-            Console.ForegroundColor = Texto;
+            Console.ForegroundColor = _corTexto;
             Console.ReadLine();
         }
 
@@ -186,10 +190,10 @@ namespace GolPro.Utils
             Console.SetCursorPosition(col, row);
             Console.Write(new string(' ', 65));
             if (!string.IsNullOrEmpty(msg)) {
-                Console.ForegroundColor = CorErro;
+                Console.ForegroundColor = _corErro;
                 Console.SetCursorPosition(col, row);
                 Console.Write($"  ✖  {msg}");
-                Console.ForegroundColor = Texto;
+                Console.ForegroundColor = _corTexto;
             }
         }
 
@@ -203,7 +207,7 @@ namespace GolPro.Utils
 
             // caixa do menu
             LimparArea(colIni, linIni, colFin, linFin);
-            Console.ForegroundColor = MenuBorda;
+            Console.ForegroundColor = _menuBorda;
 
             for (int c = colIni + 1; c < colFin; c++)
             {
@@ -222,7 +226,7 @@ namespace GolPro.Utils
 
             // hint na borda superior
             string hint2 = "↑↓ 0-9 Enter";
-            Console.ForegroundColor = MenuBorda;
+            Console.ForegroundColor = _menuBorda;
             Console.SetCursorPosition(colFin - hint2.Length - 1, linIni);
             Console.Write(hint2);
 
@@ -237,18 +241,18 @@ namespace GolPro.Utils
                     Console.SetCursorPosition(colIni + 1, linIni + 1 + i);
                     if (i == sel)
                     {
-                        Console.BackgroundColor = SelFundo;
-                        Console.ForegroundColor = SelTexto;
+                        Console.BackgroundColor = _selFundo;
+                        Console.ForegroundColor = _selTexto;
                         Console.Write($" ► {opcoes[i].PadRight(maior + 1)}");
                     }
                     else
                     {
-                        Console.BackgroundColor = Fundo;
-                        Console.ForegroundColor = Texto;
+                        Console.BackgroundColor = _corFundo;
+                        Console.ForegroundColor = _corTexto;
                         Console.Write($"   {opcoes[i].PadRight(maior + 1)}");
                     }
-                    Console.BackgroundColor = Fundo;
-                    Console.ForegroundColor = Texto;
+                    Console.BackgroundColor = _corFundo;
+                    Console.ForegroundColor = _corTexto;
                 }
             }
 
