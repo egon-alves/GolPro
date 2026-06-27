@@ -39,7 +39,9 @@ namespace GolPro.Controller
 
         }
 
-        /// <summary>Localiza uma partida pelo ID.</summary>
+        /// <summary>
+        /// Localiza uma partida pelo ID.
+        /// </summary>
         private PartidaModel FindById(int id)
         {
             foreach (PartidaModel p in _partidas)
@@ -48,6 +50,9 @@ namespace GolPro.Controller
             return null;
         }
 
+        /// <summary>
+        /// Monta o formulário de registro de partidas na tela, exibindo os rótulos dos campos.
+        /// </summary>
         private void ShowForm()
         {
             _tela.PrepararTela("Registro de Partidas", _column, _row, _column + _width, _row + _height);
@@ -76,6 +81,9 @@ namespace GolPro.Controller
             Console.SetCursorPosition(navCol, navRow++); Console.Write("ESC    Volta ao menu anterior");
         }
 
+        /// <summary>
+        /// Lê os dados da partida via console. "PK" lê o ID; "DT" lê times, data e gols.
+        /// </summary>
         public void EnterData(string which){
 
          if(which == "PK"){
@@ -204,6 +212,9 @@ namespace GolPro.Controller
         }
 
 
+        /// <summary>
+        /// Exibe os dados da partida atual nos campos do formulário.
+        /// </summary>
         public void ShowData()
         {
             if (_current == null) return;
@@ -236,6 +247,9 @@ namespace GolPro.Controller
 
         // ── Auxiliares para Gols de Jogadores ────────────────────────────────
 
+        /// <summary>
+        /// Reverte os gols dos jogadores informados, decrementando 1 gol de cada.
+        /// </summary>
         private void EstornarGolsJogadores(List<string> matriculas)
         {
             foreach (string matricula in matriculas)
@@ -246,6 +260,9 @@ namespace GolPro.Controller
             }
         }
 
+        /// <summary>
+        /// Solicita ao usuário os autores dos gols e registra as estatísticas nos jogadores.
+        /// </summary>
         private void RegistrarGolsJogadores(int quantidadeGols, string codigoTime, List<string> listaMatriculas, string tipoTime)
         {
             listaMatriculas.Clear();
@@ -295,6 +312,9 @@ namespace GolPro.Controller
         }
 
         // ── CRUD ──────────────────────────────────────────────────────────────
+        /// <summary>
+        /// Executa o fluxo CRUD de partidas: busca por ID e oferece incluir, alterar ou excluir.
+        /// </summary>
         public void CRUD()
         {
             ShowForm();
@@ -423,6 +443,9 @@ namespace GolPro.Controller
 
         // ── Relatórios ────────────────────────────────────────────────────────
 
+        /// <summary>
+        /// Prepara a tela de relatório com o título e cabeçalho de colunas apropriado.
+        /// </summary>
         private void ShowReportForm(string titulo)
         {
             _tela.PrepararTela(titulo, _column, _row, _column + _width, _row + _height);
@@ -438,18 +461,27 @@ namespace GolPro.Controller
             }
         }
 
+        /// <summary>
+        /// Exibe uma linha do relatório de classificação com os dados do time.
+        /// </summary>
         private void ShowReportRow(int row, TimeModel t)
         {
             Console.SetCursorPosition(_column + 2, _row + row);
             Console.Write($"{t.Codigo,-4} {t.Nome,-20} {t.Pontos,3} {t.Vitorias,3} {t.Empates,3} {t.Derrotas,3} {t.GolsPro,3} {t.GolsContra,3} {t.SaldoGols,3}");
         }
 
+        /// <summary>
+        /// Exibe uma linha do relatório de artilheiros com os dados do jogador.
+        /// </summary>
         private void ShowReportRow(int row, JogadorModel j)
         {
             Console.SetCursorPosition(_column + 2, _row + row);
             Console.Write($"{j.Matricula,-10} {j.Nome,-20} {j.CodigoTime,-5} {j.GolsMarcados,4}");
         }
 
+        /// <summary>
+        /// Gera e exibe o relatório de classificação dos times, ordenado por pontos, saldo e gols pró.
+        /// </summary>
         public void Relatorio()
         {
             ShowReportForm("Tabela de Classificação");
@@ -476,6 +508,9 @@ namespace GolPro.Controller
             _tela.Perguntar("Tecle Enter para voltar: ", _row + _height - 2, _column + 2, _column + _width - 2);
         }
 
+        /// <summary>
+        /// Gera e exibe o relatório de artilheiros, listando jogadores com gols em ordem decrescente.
+        /// </summary>
         public void ReportArtilheiros()
         {
             ShowReportForm("Artilheiros do Campeonato");

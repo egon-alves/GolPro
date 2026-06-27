@@ -39,6 +39,9 @@ namespace GolPro.Controller
 
         // ── Busca (privado) ───────────────────────────────────────────────────
 
+        /// <summary>
+        /// Verifica se um time com o código informado existe na lista de times cadastrados.
+        /// </summary>
         private bool TimeExiste(string codigoTime)
         {
             foreach (TimeModel time in _times)
@@ -49,6 +52,9 @@ namespace GolPro.Controller
             return false;
         }
 
+        /// <summary>
+        /// Localiza um jogador pela matrícula na lista de jogadores cadastrados.
+        /// </summary>
         private JogadorModel FindByCode(string matricula)
         {
             foreach (JogadorModel jogador in _jogadores)
@@ -59,11 +65,17 @@ namespace GolPro.Controller
             return null;
         }
 
+        /// <summary>
+        /// Busca e retorna um jogador pela matrícula. Utilizado por outros controllers.
+        /// </summary>
         public JogadorModel BuscarPorMatricula(string matricula)
         {
             return FindByCode(matricula);
         }
 
+        /// <summary>
+        /// Persiste a lista de jogadores no arquivo de dados.
+        /// </summary>
         public void Salvar()
         {
             _data.SalvarJogador(_jogadores);
@@ -71,6 +83,9 @@ namespace GolPro.Controller
 
         // ── Tela ─────────────────────────────────────────────────────────────
 
+        /// <summary>
+        /// Monta o formulário de cadastro de jogadores na tela, exibindo os rótulos dos campos.
+        /// </summary>
         public void ShowForm()
         {
             _tela.PrepararTela("Cadastro de Jogadores", _column, _row, _column + _width, _row + _height);
@@ -97,6 +112,9 @@ namespace GolPro.Controller
                 Console.SetCursorPosition(navCol, navRow++); Console.Write("ESC    Volta ao menu anterior");
         }
 
+        /// <summary>
+        /// Lê os dados do jogador via console. "PK" lê a matrícula; "DT" lê nome, posição e time.
+        /// </summary>
         public void EnterData(string which)
         {
             if (which == "PK")
@@ -190,6 +208,9 @@ namespace GolPro.Controller
             }
         }
 
+        /// <summary>
+        /// Exibe os dados do jogador atual nos campos do formulário.
+        /// </summary>
         public void ShowData()
         {
             if (_current == null) return;
@@ -215,6 +236,9 @@ namespace GolPro.Controller
 
         // ── CRUD ──────────────────────────────────────────────────────────────
 
+        /// <summary>
+        /// Executa o fluxo CRUD de jogadores: busca por matrícula e oferece incluir, alterar ou excluir.
+        /// </summary>
         public void CRUD()
         {
             ShowForm();

@@ -201,6 +201,9 @@ namespace GolPro.Utils
         // ── Métodos privados ──────────────────────────────────────────────────
         //
 
+        /// <summary>
+        /// Exibe um menu interativo com navegação por setas, teclas numéricas e Enter, retornando o prefixo da opção selecionada.
+        /// </summary>
         private string MenuInterativo(int colIni, int linIni, int colFin, int linFin, List<string> opcoes)
         {
             int maior = opcoes.Max(o => o.Length);
@@ -287,6 +290,9 @@ namespace GolPro.Utils
             return opcoes[sel].Split(' ')[0];
         }
 
+        /// <summary>
+        /// Lê a entrada do usuário caractere a caractere, permitindo cancelar a operação com a tecla Esc.
+        /// </summary>
         public string LerEntradaComEsc()
         {
             string entrada = "";

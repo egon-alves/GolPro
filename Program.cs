@@ -8,6 +8,11 @@ namespace GolPro
 {
     internal class Program
     {
+        /// <summary>
+        /// Ponto de entrada da aplicação. Inicializa os controllers, configura a tela
+        /// e exibe o menu principal com as opções de gerenciamento de times, jogadores,
+        /// partidas e relatórios.
+        /// </summary>
         static void Main(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;

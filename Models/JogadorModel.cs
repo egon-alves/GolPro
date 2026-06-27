@@ -71,17 +71,26 @@ namespace GolPro.Models
 
          // Metodos
 
+        /// <summary>
+        /// Incrementa a contagem de gols marcados pelo jogador.
+        /// </summary>
         public void AdicionarGols(int gols)
         {
             _golsMarcados += gols;
         }
 
 
+        /// <summary>
+        /// Decrementa a contagem de gols marcados pelo jogador (usado ao estornar partidas).
+        /// </summary>
         public void EstornarGols(int gols)
         {
             _golsMarcados -= gols;
         }
 
+        /// <summary>
+        /// Converte os dados do jogador em uma string delimitada por ponto-e-vírgula para persistência em arquivo.
+        /// </summary>
         public string Serializar()
         {
             return $"{_matricula};{_nome};{_posicao};{_codigoTime};{_golsMarcados}";

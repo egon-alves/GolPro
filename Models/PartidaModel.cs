@@ -96,6 +96,9 @@ namespace GolPro.Models
 
     // Metodos
         
+        /// <summary>
+        /// Serializa os dados da partida em uma string formatada separada por ponto e vírgula.
+        /// </summary>
         public string Serializar()
         {
             string mandanteMats = string.Join(",", _golsMandanteMatriculas);

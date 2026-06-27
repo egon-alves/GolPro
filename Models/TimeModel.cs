@@ -112,6 +112,9 @@ namespace GolPro.Models
         // Metodos adicionais para manipulação dos dados do time podem ser adicionados aqui
 
 
+        /// <summary>
+        /// Registra o resultado de uma partida, atualizando gols pró/contra, vitórias, empates, derrotas e pontos do time.
+        /// </summary>
              public void RegistrarPartida(int golsMarcados, int golsSofridos)
         {
             _golsPro += golsMarcados;
@@ -135,6 +138,9 @@ namespace GolPro.Models
         }
 
    
+        /// <summary>
+        /// Estorna o resultado de uma partida, revertendo gols pró/contra, vitórias, empates, derrotas e pontos do time.
+        /// </summary>
         public void EstornarResultado(int golsMarcados, int golsSofridos)
         {
             _golsPro -= golsMarcados;
@@ -159,6 +165,9 @@ namespace GolPro.Models
 
 
 
+        /// <summary>
+        /// Serializa os dados do time em uma string formatada separada por ponto e vírgula.
+        /// </summary>
         public string Serializar()
         {
             return $"{_codigo};{_nome};{_cidade};{_pontos};{_vitorias};{_empates};{_derrotas};{_golsPro};{_golsContra}";

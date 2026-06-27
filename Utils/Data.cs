@@ -14,6 +14,9 @@ namespace GolPro.Utils
             Directory.CreateDirectory(Path.GetDirectoryName(arquivo));
         }
 
+        /// <summary>
+        /// Salva a lista de times no arquivo, serializando cada time em uma linha.
+        /// </summary>
         public void SalvarTimes(List<TimeModel> times)
         {
             using (StreamWriter sw = new StreamWriter(this._arquivo))
@@ -25,6 +28,9 @@ namespace GolPro.Utils
             }
         }
 
+        /// <summary>
+        /// Carrega a lista de times a partir do arquivo, desserializando cada linha em um objeto TimeModel.
+        /// </summary>
         public List<TimeModel> CarregarTimes()
         {
             List<TimeModel> times = new List<TimeModel>();
@@ -69,6 +75,9 @@ namespace GolPro.Utils
 
     // Area de Jogadores
     
+        /// <summary>
+        /// Salva a lista de jogadores no arquivo, serializando cada jogador em uma linha.
+        /// </summary>
         public void SalvarJogador(List<JogadorModel> jogadores)
         {
             using(StreamWriter sw = new StreamWriter(this._arquivo))
@@ -82,6 +91,9 @@ namespace GolPro.Utils
     
 
 
+        /// <summary>
+        /// Carrega a lista de jogadores a partir do arquivo, desserializando cada linha em um objeto JogadorModel.
+        /// </summary>
         public List<JogadorModel> CarregarJogadores()
     {
         List<JogadorModel> jogadores = new List<JogadorModel>();
@@ -112,6 +124,9 @@ namespace GolPro.Utils
         return jogadores;
     }
 
+    /// <summary>
+    /// Salva a lista de partidas no arquivo, serializando cada partida em uma linha.
+    /// </summary>
     public void SalvarPartidas(List<PartidaModel> partidas)
     {
         using(StreamWriter sw = new StreamWriter(this._arquivo))
@@ -123,6 +138,9 @@ namespace GolPro.Utils
         }
     }
 
+    /// <summary>
+    /// Carrega a lista de partidas a partir do arquivo, desserializando cada linha em um objeto PartidaModel.
+    /// </summary>
     public List<PartidaModel> CarregarPartidas()
     {
 

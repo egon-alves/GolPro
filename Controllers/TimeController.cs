@@ -46,6 +46,9 @@ namespace GolPro.Controller
 
         // ── Busca (privado) ───────────────────────────────────────────────────
 
+        /// <summary>
+        /// Localiza um time pelo código na lista de times cadastrados.
+        /// </summary>
         private TimeModel FindByCode(string codigo)
         {
             foreach (TimeModel time in _times)
@@ -58,11 +61,17 @@ namespace GolPro.Controller
 
         // ── Busca (público — usado pelo PartidaController) ───────────────────
 
+        /// <summary>
+        /// Busca e retorna um time pelo código. Utilizado por outros controllers.
+        /// </summary>
         public TimeModel BuscarPorCodigo(string codigo)
         {
             return FindByCode(codigo);
         }
 
+        /// <summary>
+        /// Persiste a lista de times no arquivo de dados.
+        /// </summary>
         public void Salvar()
         {
             _data.SalvarTimes(_times);
@@ -70,6 +79,9 @@ namespace GolPro.Controller
 
         // ── Tela ─────────────────────────────────────────────────────────────
 
+        /// <summary>
+        /// Monta o formulário de cadastro de times na tela, exibindo os rótulos dos campos.
+        /// </summary>
         public void ShowForm()
         {
             _tela.PrepararTela("Cadastro de Times", _column, _row, _column + _width, _row + _height);
@@ -89,6 +101,9 @@ namespace GolPro.Controller
             Console.SetCursorPosition(navCol, navRow++); Console.Write("ESC    Volta ao menu anterior");
         }
 
+        /// <summary>
+        /// Lê os dados do time via console. "PK" lê o código; "DT" lê nome e cidade.
+        /// </summary>
         public void EnterData(string which)
         {
             if (which == "PK")
@@ -156,6 +171,9 @@ namespace GolPro.Controller
             }
         }
 
+        /// <summary>
+        /// Exibe os dados do time atual nos campos do formulário.
+        /// </summary>
         public void ShowData()
         {
             if (_current == null) return;
@@ -180,6 +198,9 @@ namespace GolPro.Controller
 
         // ── CRUD ──────────────────────────────────────────────────────────────
 
+        /// <summary>
+        /// Executa o fluxo CRUD de times: busca por código e oferece incluir, alterar ou excluir.
+        /// </summary>
         public void CRUD()
         {
             ShowForm();
