@@ -96,12 +96,6 @@ namespace GolPro.Models
 
     // Metodos
         
-        public string Placar()
-        {
-            return $"{_golsMandante} x {_golsVisitante}";
-            
-        }
-
         public string Serializar()
         {
             string mandanteMats = string.Join(",", _golsMandanteMatriculas);
