@@ -23,7 +23,11 @@ namespace GolPro.Models
             set { _nome = value; }
         }
 
-
+        public string Posicao
+        {
+            get { return _posicao; }
+            set { _posicao = value; }
+        }
 
         public string CodigoTime
         {
@@ -39,11 +43,11 @@ namespace GolPro.Models
         }
 
 
-        public JogadorModel(string matricula, string nome, string codigoTime)
+        public JogadorModel(string matricula, string nome, string posicao, string codigoTime)
         {
             _matricula = matricula;
             _nome = nome;
-    
+            _posicao = posicao;
             _codigoTime = codigoTime;
             _golsMarcados = 0;
         }
