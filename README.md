@@ -102,38 +102,19 @@ Localização: PartidaController.ReportArtilheiros()
 --- 
 # 7 - Diagrama de Classes 
 
+## Classes de Análise (conceitual)
 ```mermaid
 classDiagram
     class Time {
-        +string Codigo
-        +string Nome
-        +string Cidade
-        +int Pontos
-        +int Vitorias
-        +int Empates
-        +int Derrotas
-        +int GolsPro
-        +int GolsContra
-        +int SaldoGols
+
     }
 
     class Jogador {
-        +string Matricula
-        +string Nome
-        +string Posicao
-        +string CodigoTime
-        +int GolsMarcados
+
     }
 
     class Partida {
-        +int Id
-        +DateTime Data
-        +string CodigoMandante
-        +string CodigoVisitante
-        +int GolsMandante
-        +int GolsVisitante
-        +List~string~ GolsMandanteMatriculas
-        +List~string~ GolsVisitanteMatriculas
+
     }
 
     Time "1" --> "0..*" Jogador : CodigoTime
@@ -141,6 +122,8 @@ classDiagram
     Partida "0..*" --> "1" Time : visitante
     Partida "0..*" --> "0..*" Jogador : autores dos gols
 ```
+
+Diagrama 2 — Entidades do Sistema (lógico)
 
 --- 
 
