@@ -123,7 +123,187 @@ classDiagram
     Partida "0..*" --> "0..*" Jogador : autores dos gols
 ```
 
-Diagrama 2 — Entidades do Sistema (lógico)
+## Entidades do Sistema (lógico)
+```mermaid
+classDiagram
+    direction LR
+
+    %% ───────── Camada Models ─────────
+    class TimeModel {
+        -string _codigo
+        -string _nome
+        -string _cidade
+        -int _pontos
+        -int _vitorias
+        -int _empates
+        -int _derrotas
+        -int _golsPro
+        -int _golsContra
+        +string Codigo
+        +string Nome
+        +string Cidade
+        +int Pontos
+        +int Vitorias
+        +int Empates
+        +int Derrotas
+        +int GolsPro
+        +int GolsContra
+        +int SaldoGols
+        +RegistrarPartida(int golsMarcados, int golsSofridos) void
+        +EstornarResultado(int golsMarcados, int golsSofridos) void
+        +Serializar() string
+    }
+
+    class JogadorModel {
+        -string _matricula
+        -string _nome
+        -string _posicao
+        -string _codigoTime
+        -int _golsMarcados
+        +string Matricula
+        +string Nome
+        +string Posicao
+        +string CodigoTime
+        +int GolsMarcados
+        +AdicionarGols(int gols) void
+        +EstornarGols(int gols) void
+        +Serializar() string
+    }
+
+    class PartidaModel {
+        -int _id
+        -string _codigoMandante
+        -string _codigoVisitante
+        -DateTime _data
+        -int _golsMandante
+        -int _golsVisitante
+        -List~string~ _golsMandanteMatriculas
+        -List~string~ _golsVisitanteMatriculas
+        +int Id
+        +string CodigoMandante
+        +string CodigoVisitante
+        +DateTime Data
+        +int GolsMandante
+        +int GolsVisitante
+        +List~string~ GolsMandanteMatriculas
+        +List~string~ GolsVisitanteMatriculas
+        +Serializar() string
+    }
+
+    %% ───────── Camada Controllers ─────────
+    class TimeController {
+        -List~TimeModel~ _times
+        -Tela _tela
+        -Data _data
+        -TimeModel _current
+        +List~TimeModel~ Times
+        +BuscarPorCodigo(string codigo) TimeModel
+        +Salvar() void
+        +ShowForm() void
+        +EnterData(string which) void
+        +ShowData() void
+        +CRUD() void
+        -FindByCode(string codigo) TimeModel
+    }
+
+    class JogadorController {
+        -List~JogadorModel~ _jogadores
+        -List~TimeModel~ _times
+        -Tela _tela
+        -Data _data
+        -JogadorModel _current
+        +List~JogadorModel~ Jogadores
+        +BuscarPorMatricula(string matricula) JogadorModel
+        +Salvar() void
+        +ShowForm() void
+        +EnterData(string which) void
+        +ShowData() void
+        +CRUD() void
+        -TimeExiste(string codigoTime) bool
+        -FindByCode(string matricula) JogadorModel
+    }
+
+    class PartidaController {
+        -List~PartidaModel~ _partidas
+        -Tela _tela
+        -Data _data
+        -TimeController _timeController
+        -JogadorController _jogadorController
+        -PartidaModel _current
+        -int _proximoId
+        +EnterData(string which) void
+        +ShowData() void
+        +CRUD() void
+        +Relatorio() void
+        +ReportArtilheiros() void
+        -FindById(int id) PartidaModel
+        -ShowForm() void
+        -RegistrarGolsJogadores(int qtd, string codigoTime, List~string~ mats, string tipo) void
+        -EstornarGolsJogadores(List~string~ matriculas) void
+    }
+
+    %% ───────── Camada Utils ─────────
+    class Tela {
+        -ConsoleColor _corFundo
+        -ConsoleColor _corTexto
+        +PrepararTela(string titulo, int ci, int li, int cf, int lf) void
+        +MostrarMenu(List~string~ opcoes) string
+        +LerEntradaComEsc() string
+        +MostrarMensagem(string msg, int col, int row) void
+        +MostrarErroInLine(string msg, int col, int row) void
+        +Centralizar(int ci, int cf, int linha, string texto) void
+        +Perguntar(string pergunta, int linha, int ci, int cf) string
+    }
+
+    class Data {
+        -string _arquivo
+        +SalvarTimes(List~TimeModel~ times) void
+        +CarregarTimes() List~TimeModel~
+        +SalvarJogador(List~JogadorModel~ jogadores) void
+        +CarregarJogadores() List~JogadorModel~
+        +SalvarPartidas(List~PartidaModel~ partidas) void
+        +CarregarPartidas() List~PartidaModel~
+    }
+
+    class VoltarMenuException {
+        +VoltarMenuException()
+    }
+
+    class Program {
+        +Main(string[] args)$ void
+    }
+
+    %% ───────── Relacionamentos ─────────
+    Exception <|-- VoltarMenuException
+
+    Program ..> Tela : cria
+    Program ..> TimeController : cria
+    Program ..> JogadorController : cria
+    Program ..> PartidaController : cria
+
+    TimeController o-- "0..*" TimeModel : _times
+    TimeController --> Tela
+    TimeController --> Data
+
+    JogadorController o-- "0..*" JogadorModel : _jogadores
+    JogadorController --> "0..*" TimeModel : _times (compartilhada)
+    JogadorController --> Tela
+    JogadorController --> Data
+
+    PartidaController o-- "0..*" PartidaModel : _partidas
+    PartidaController --> TimeController
+    PartidaController --> JogadorController
+    PartidaController --> Tela
+    PartidaController --> Data
+
+    Data ..> TimeModel : serializa
+    Data ..> JogadorModel : serializa
+    Data ..> PartidaModel : serializa
+
+    Tela ..> VoltarMenuException : lança
+```
+
+
 
 --- 
 
