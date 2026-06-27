@@ -39,17 +39,6 @@ namespace GolPro.Controller
 
         }
 
-        // ── Acesso à lista ──────────────────────────────────────────────────
-
-        public List<PartidaModel> ObterTodos()     { return _partidas; }
-        public int                ObterProximoId() { return _proximoId; }
-
-        public void DefinirLista(List<PartidaModel> lista, int proximoId)
-        {
-            _partidas  = lista;
-            _proximoId = proximoId;
-        }
-
         /// <summary>Localiza uma partida pelo ID.</summary>
         private PartidaModel FindById(int id)
         {
