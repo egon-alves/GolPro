@@ -3,7 +3,7 @@
 
 # Arquivos compilados
 bin/
-obj/
+obj/ 
 
 # Arquivos específicos
 *.user

@@ -4,7 +4,7 @@ namespace GolPro.Models
 {
     public class TimeModel
     {
-        // Atributos do time - podem ser expandidos conforme necessário
+
         private string _codigo;
         private string _nome;
         private string _cidade;
@@ -15,7 +15,6 @@ namespace GolPro.Models
         private int _golsPro;
         private int _golsContra;
 
-        // --- Propriedades publicas
 
         public string Codigo
         {
@@ -77,11 +76,10 @@ namespace GolPro.Models
         }
 
 
-        // Metodo construtor - pode ser expandido para receber parâmetros ou realizar validações
 
         public TimeModel()
         {
-            // Inicialização padrão - pode ser expandida conforme necessário
+
             _codigo = "";
             _nome = "";
             _cidade = "";
@@ -96,7 +94,7 @@ namespace GolPro.Models
 
         public TimeModel(String codigo, string nome, string cidade)
         {
-            // Inicialização padrão - pode ser expandida conforme necessário
+
             _codigo = codigo;
             _nome = nome;
             _cidade = cidade;
@@ -109,7 +107,6 @@ namespace GolPro.Models
 
         }
 
-        // Metodos adicionais para manipulação dos dados do time podem ser adicionados aqui
 
 
         /// <summary>

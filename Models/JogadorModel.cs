@@ -4,18 +4,12 @@ namespace GolPro.Models
 {
     public class JogadorModel
     {
-        
-        // Atributos do Jogador
-
-        private string _matricula;
+                private string _matricula;
         private string _nome;
         private string _posicao;
         private string _codigoTime;
         private int _golsMarcados;
 
-
-         // Propriedades responsáveis por permitir a leitura e alteração
-        // dos atributos privados da classe JogadorModel.
 
         public string Matricula
         {
@@ -48,8 +42,6 @@ namespace GolPro.Models
             set { _golsMarcados = value; }
         }
 
-  // Construtores
-
 
         public JogadorModel(string matricula, string nome, string posicao, string codigoTime)
         {
@@ -68,8 +60,6 @@ namespace GolPro.Models
             _codigoTime = "";
             _golsMarcados       = 0;
         }
-
-         // Metodos
 
         /// <summary>
         /// Incrementa a contagem de gols marcados pelo jogador.

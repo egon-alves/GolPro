@@ -48,7 +48,9 @@ namespace GolPro.Utils
         // ── Métodos da interface Biblioteca (obrigatórios) ────────────────────
         //
 
-        // PrepararTela: limpa, monta moldura, centraliza o título
+        /// <summary>
+        /// Limpa a tela, monta uma moldura dupla e centraliza o título no topo.
+        /// </summary>
         public void PrepararTela(string titulo, int ci, int li, int cf, int lf)
         {
             Console.BackgroundColor = _corFundo;
@@ -79,7 +81,9 @@ namespace GolPro.Utils
             Console.ForegroundColor = _corTexto;
         }
 
-        // Centralizar: escreve texto centralizado numa linha
+        /// <summary>
+        /// Escreve um texto centralizado em uma linha específica, considerando a largura entre as colunas informadas.
+        /// </summary>
         public void Centralizar(int ci, int cf, int linha, string texto)
         {
             int col = ci + ((cf - ci - texto.Length) / 2);
@@ -87,7 +91,9 @@ namespace GolPro.Utils
             Console.Write(texto);
         }
 
-        // Perguntar: limpa a linha, escreve a pergunta e lê a resposta
+        /// <summary>
+        /// Limpa uma linha específica, exibe a pergunta e retorna a resposta digitada pelo usuário.
+        /// </summary>
         public string Perguntar(string pergunta, int linha, int ci, int cf)
         {
             LimparArea(ci, linha, cf, linha);
@@ -96,7 +102,9 @@ namespace GolPro.Utils
             return Console.ReadLine() ?? "";
         }
 
-        // LimparArea: apaga uma área retangular da tela
+        /// <summary>
+        /// Apaga uma área retangular da tela, preenchendo-a com a cor de fundo padrão.
+        /// </summary>
         public void LimparArea(int ci, int li, int cf, int lf)
         {
             Console.BackgroundColor = _corFundo;
@@ -107,7 +115,9 @@ namespace GolPro.Utils
             }
         }
 
-        // MontarMoldura: desenha moldura dupla
+        /// <summary>
+        /// Desenha uma moldura dupla na tela, utilizando os limites de coluna e linha especificados.
+        /// </summary>
         public void MontarMoldura(int ci, int li, int cf, int lf)
         {
             LimparArea(ci, li, cf, lf);
@@ -132,7 +142,9 @@ namespace GolPro.Utils
             Console.ForegroundColor = _corTexto;
         }
 
-        // MostrarMenu (assinatura Biblioteca — com posição explícita)
+        /// <summary>
+        /// Exibe um menu interativo com posição explícita na tela e retorna a opção selecionada.
+        /// </summary>
         public string MostrarMenu(int colIni, int linIni, List<string> opcoes)
         {
             int maior  = opcoes.Max(o => o.Length);
@@ -141,7 +153,9 @@ namespace GolPro.Utils
             return MenuInterativo(colIni, linIni, colFin, linFin, opcoes);
         }
 
-        // MostrarMenu (sobrecarga sem posição — calcula o centro)
+        /// <summary>
+        /// Exibe um menu interativo centralizado automaticamente na tela e retorna a opção selecionada.
+        /// </summary>
         public string MostrarMenu(List<string> opcoes)
         {
             int maior   = opcoes.Max(o => o.Length);
@@ -160,7 +174,9 @@ namespace GolPro.Utils
         // ── Extensões do GolPro ───────────────────────────────────────────────
         //
 
-        // MostrarMensagem: sucesso em verde
+        /// <summary>
+        /// Exibe uma mensagem de sucesso na tela e aguarda a confirmação do usuário (tecla Enter).
+        /// </summary>
         public void MostrarMensagem(string msg, int col, int row)
         {
             Console.SetCursorPosition(col, row);
@@ -172,7 +188,9 @@ namespace GolPro.Utils
             Console.ReadLine();
         }
 
-        // MostrarErro: erro em vermelho
+        /// <summary>
+        /// Exibe uma mensagem de erro na tela e aguarda a confirmação do usuário (tecla Enter).
+        /// </summary>
         public void MostrarErro(string msg, int col, int row)
         {
             Console.SetCursorPosition(col, row);
@@ -184,7 +202,9 @@ namespace GolPro.Utils
             Console.ReadLine();
         }
 
-        // MostrarErroInLine: exibe o erro sem pausar a tela (ideal para loops de validação)
+        /// <summary>
+        /// Exibe uma mensagem de erro sem pausar a execução da tela (ideal para loops de validação).
+        /// </summary>
         public void MostrarErroInLine(string msg, int col, int row)
         {
             Console.SetCursorPosition(col, row);

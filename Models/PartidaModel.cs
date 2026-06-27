@@ -13,7 +13,6 @@ namespace GolPro.Models
         private List<string> _golsMandanteMatriculas;
         private List<string> _golsVisitanteMatriculas;
 
-        // Deixar os metodos publicos
 
         public int Id
         {
@@ -67,7 +66,7 @@ namespace GolPro.Models
             set { _golsVisitanteMatriculas = value; }
         }
 
-    // Criar os  construtores
+
         public PartidaModel()
         {
             _id = 0;
@@ -94,7 +93,7 @@ namespace GolPro.Models
 
 
 
-    // Metodos
+
         
         /// <summary>
         /// Serializa os dados da partida em uma string formatada separada por ponto e vírgula.
