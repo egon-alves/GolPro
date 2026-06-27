@@ -12,7 +12,7 @@ namespace GolPro
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-            Tela tela = new Tela(ConsoleColor.Yellow, ConsoleColor.Black);
+            Tela tela = new Tela(ConsoleColor.Black, ConsoleColor.Green);
 
             // col=2, row=2, width=77, height=22  →  moldura de (2,2) até (79,24)
             TimeController timeController = new TimeController(2, 2, 77, 22, tela);
@@ -37,12 +37,12 @@ namespace GolPro
                 {
                     tela.PrepararTela("GolPRO - Sistema de registro", 2, 2, 79, 24);
 
-                    int navCol = 4;
+                    int navCol = 6;
                     int navRow = 19;
                     Console.SetCursorPosition(navCol, navRow++); Console.Write("Navegação:");
                     Console.SetCursorPosition(navCol, navRow++); Console.Write("↑ ↓    Move a seleção");
                     Console.SetCursorPosition(navCol, navRow++); Console.Write("ENTER  Confirma a opção");
-                    Console.SetCursorPosition(navCol, navRow++); Console.Write("ESC    Volta ao menu anterior");
+                    
 
                     menuEscolhido = tela.MostrarMenu(listMenu);
 
